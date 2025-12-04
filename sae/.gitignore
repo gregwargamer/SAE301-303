@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+
+# build outputs
+dist/
+/.angular/cache
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+
+# environment
+.env
+.env.local
+.env.*.local
