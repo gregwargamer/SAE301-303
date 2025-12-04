@@ -1,16 +1,35 @@
-* {
+.everyone {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background-color: #e2bdb7;
   border-radius: 10px;
-  width: 80%;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  align-items: center;
-  margin: auto;
+  width: 90%;
+  max-width: 1200px;
+  padding: 10px 20px;
+  margin: 10px auto;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-  color: blue;
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+a {
+  text-decoration: none;
+  color: #4a4a4a;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+a:hover {
+  color: #000;
 }

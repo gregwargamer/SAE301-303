@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header-component',
-  imports: [],
+  imports: [RouterLink, CommonModule],
   templateUrl: './header-component.html',
-  styleUrls: ['./header-component.css'],
+  styleUrl: './header-component.css',
 })
 export class HeaderComponent {
 

@@ -1,9 +1,12 @@
 <section class="panier">
   <h2>Panier</h2>
 
-  <p *ngIf="!panier.length">Votre panier est vide.</p>
+  <p *ngIf="loading">Chargement...</p>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
 
-  <ul *ngIf="panier.length">
+  <p *ngIf="!loading && !panier.length">Votre panier est vide.</p>
+
+  <ul *ngIf="!loading && panier.length">
     <li *ngFor="let item of panier">
       <div class="panier__item">
         <div>
@@ -20,7 +23,7 @@
     </li>
   </ul>
 
-  <div *ngIf="panier.length > 0">
-    <p>Total du panier : {{ total }} €</p>
+  <div *ngIf="!loading && panier.length > 0">
+    <p>Total du panier : {{ total | number: '1.2-2' }} €</p>
   </div>
 </section>
