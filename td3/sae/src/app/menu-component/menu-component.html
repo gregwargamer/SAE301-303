@@ -1,0 +1,23 @@
+<div>
+  <h2>Menu</h2>
+  <div *ngFor="let box of boxes">
+    
+    <h3>{{ box.name }}</h3>
+    <p>Prix: {{ box.price }} €</p>
+    <p>Pièces: {{ box.pieces }}</p>
+    <p>Prix: {{ box.price }} €</p>
+    
+    <h4>Contenu:</h4>
+    <ul>
+      <li *ngFor="let food of box.foods">
+        {{ food.name }} quantité: {{ food.quantity }}
+      </li>
+    </ul>
+
+    <div class="saveurs">
+      <p><b>Saveurs: </b> <span *ngFor="let flavor of box.flavors">{{ flavor }} </span></p>
+    </div>
+    <button type="button" (click)="addToCart(box)">Ajouter au panier</button>
+    <hr>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<section class="panier">
+  <h2>Panier</h2>
+
+  <p *ngIf="!panier.length">Votre panier est vide.</p>
+
+  <ul *ngIf="panier.length">
+    <li *ngFor="let item of panier">
+      <div class="panier__item">
+        <div>
+          <strong>{{ item.name }}</strong>
+          <p>Quantité : {{ item.quantite }}</p>
+          <p>Prix unitaire : {{ item.prix_unitaire | number: '1.2-2' }} €</p>
+        </div>
+        <div class="panier__actions">
+          <button type="button" (click)="updateQuantity(item, -1)">-</button>
+          <button type="button" (click)="updateQuantity(item, 1)">+</button>
+          <button type="button" (click)="removeItem(item)">Supprimer</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <div *ngIf="panier.length > 0">
+    <p>Total du panier : {{ total }} €</p>
+  </div>
+</section>
