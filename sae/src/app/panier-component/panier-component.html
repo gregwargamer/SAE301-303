@@ -4,6 +4,7 @@
   <p *ngIf="loading">Chargement...</p>
   <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
 
+  <!-- si panier est vide et pas en chargement-->
   <p *ngIf="!loading && !panier.length">Votre panier est vide.</p>
 
   <ul *ngIf="!loading && panier.length">

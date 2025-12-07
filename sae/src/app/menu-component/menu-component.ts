@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../services/rest-api.service';
 import { PanierService } from '../services/panier.service';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 interface Box {
@@ -23,7 +25,9 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private restApiService: RestApiService,
-    private panierService: PanierService
+    private panierService: PanierService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -33,12 +37,22 @@ export class MenuComponent implements OnInit {
   }
 
   addToCart(box: Box) {
+    // verifie si lutilisateur est connecte
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
     this.panierService.addItem(box.id).subscribe({
       next: () => {
-        console.log('Ajoute au panier');
+        // article ajoute au panier
       },
       error: (error) => {
-        console.error('Erreur lors de l ajout au panier', error);
+        // si 401 redirige vers login
+        if (error.status === 401) {
+          this.router.navigate(['/login']);
+          return;
+        }
       },
     });
   }

@@ -1,34 +1,25 @@
-<header class="bg-[#c9a8a3] py-3 px-6">
-  <nav class="flex items-center mx-auto">
-    <!-- Logo -->
-    <div class="flex-shrink-0">
-      <img class="w-12 h-12" src="../../medias/eishi.png" alt="Logo Eishi">
-    </div>
+<div class="everyone">
+  <nav>
+    <a href="#accueil">Accueil</a>
+    <a href="#carte">Carte</a>
+    <a href="#nouveautes">Nouveautés</a>
+    <a href="#reservations">Réservations</a>
 
-    <div class="flex-1 flex items-center justify-center gap-24">
-      <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}" class="nav-link text-gray-700 font-medium hover:text-gray-900 transition-colors pb-1">Accueil</a>
-      
-      <a routerLink="/nouveautes" routerLinkActive="active-link" class="nav-link text-gray-700 font-medium hover:text-gray-900 transition-colors pb-1">Nouveautés</a>
-      
-      <a routerLink="/carte" routerLinkActive="active-link" class="nav-link text-gray-700 font-medium hover:text-gray-900 transition-colors pb-1">Carte</a>
-      
-      <a routerLink="/reservations" routerLinkActive="active-link" class="nav-link text-gray-700 font-medium hover:text-gray-900 transition-colors pb-1">Réservation</a>
-    </div>
+    <!-- Panier with fixed size SVG -->
+    <a href="#panier" title="Panier">
+      <svg style="width: 30px; height: 30px;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
+          <path
+            d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
+            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+      </svg>
+    </a>
 
-    <div class="flex items-center gap-4">
-      <a routerLink="/panier" class="text-gray-700 hover:text-gray-900 transition-colors relative">
-        <svg class="w-8 h-8 mr-12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-
-      <a routerLink="/login" class="px-4 py-2 border border-gray-600 rounded-full text-gray-700 font-medium hover:bg-gray-700 hover:text-white transition-colors text-sm">
-        Se connecter
-      </a>
-      
-      <a routerLink="/register" class="px-4 py-2 bg-gray-600 text-white rounded-full font-medium hover:bg-gray-700 transition-colors text-sm">
-        Créer un compte
-      </a>
-    </div>
+    <!-- Restored Connection Buttons -->
+    <a routerLink="/login">Connexion</a>
+    <a routerLink="/register">Inscription</a>
   </nav>
 </header>

@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { PanierService, CartItem } from '../services/panier.service';
+import { AuthService } from '../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-panier-component',
@@ -8,16 +11,38 @@ import { PanierService, CartItem } from '../services/panier.service';
   templateUrl: './panier-component.html',
   styleUrl: './panier-component.css',
 })
-export class PanierComponent implements OnInit {
+export class PanierComponent implements OnInit, OnDestroy {
   panier: CartItem[] = [];
   total = 0;
   loading = false;
   errorMessage = '';
+  private refreshSubscription?: Subscription;
 
-  constructor(private panierService: PanierService) {}
+  constructor(
+    private panierService: PanierService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    // verifie si l utilisateur est connecte
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/login']);
+      return;
+    }
     this.loadPanier();
+    
+    // sabonne aux changements du panier pour auto-refresh  (passur que ca marche)
+    this.refreshSubscription = this.panierService.getPanierRefresh().subscribe(() => {
+      this.loadPanier();
+    });
+  }
+
+  ngOnDestroy(): void {
+    // nettoie la subscription
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+    }
   }
 
   // charge le panier
@@ -30,8 +55,13 @@ export class PanierComponent implements OnInit {
         this.loading = false;
         this.errorMessage = '';
       },
-      error: () => {
+      error: (error) => {
         this.loading = false;
+        // si erreur 401, redirige vers login
+        if (error.status === 401) {
+          this.router.navigate(['/login']);
+          return;
+        }
         this.errorMessage = 'erreur lors du chargement';
       },
     });
@@ -49,8 +79,15 @@ export class PanierComponent implements OnInit {
   // supprime une ligne puis recharge
   removeItem(item: CartItem): void {
     this.panierService.removeItem(item.box_id).subscribe({
-      next: () => this.loadPanier(),
-      error: () => (this.errorMessage = 'erreur suppression'),
+      next: () => {
+      },
+      error: (error) => {
+        if (error.status === 401) {
+          this.router.navigate(['/login']);
+          return;
+        }
+        this.errorMessage = 'erreur suppression';
+      },
     });
   }
 
@@ -62,8 +99,15 @@ export class PanierComponent implements OnInit {
       return;
     }
     this.panierService.setQuantity(item.box_id, nouvelleQuantite).subscribe({
-      next: () => this.loadPanier(),
-      error: () => (this.errorMessage = 'erreur mise a jour'),
+      next: () => {
+      },
+      error: (error) => {
+        if (error.status === 401) {
+          this.router.navigate(['/login']);
+          return;
+        }
+        this.errorMessage = 'erreur mise a jour';
+      },
     });
   }
 }

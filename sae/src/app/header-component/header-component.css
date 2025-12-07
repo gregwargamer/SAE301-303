@@ -1,8 +1,0 @@
-/* Style pour le lien actif uniquement */
-.nav-link {
-  border-bottom: 2px solid transparent;
-}
-
-.nav-link.active-link {
-  border-bottom: 2px solid #4b5563;
-}

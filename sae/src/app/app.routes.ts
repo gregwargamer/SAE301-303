@@ -32,3 +32,4 @@ export const routes: Routes = [
     component: ReservationsComponent,
   },
 ];
+
