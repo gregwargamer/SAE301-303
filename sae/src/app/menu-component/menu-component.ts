@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { RestApiService } from '../services/rest-api.service';
-import { PanierService } from '../services/panier.service';
-import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { PanierService } from '../services/panier.service';
+import { RestApiService } from '../services/rest-api.service';
 
 interface Box {
   id: string;
@@ -22,6 +22,7 @@ interface Box {
 })
 export class MenuComponent implements OnInit {
   boxes: Box[] = [];
+  showConfirmation = false;
 
   constructor(
     private restApiService: RestApiService,
@@ -53,6 +54,34 @@ export class MenuComponent implements OnInit {
           this.router.navigate(['/login']);
           return;
         }
+      },
+    });
+  }
+
+  addToCartAndReservation(box: Box) {
+    // verifie si lutilisateur est connecte
+    if (!this.authService.isAuthenticated()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    // Ajoute au panier
+    this.panierService.addItem(box.id).subscribe({
+      next: () => {
+        // Affiche le message de confirmation
+        this.showConfirmation = true;
+        
+        // Cache le message après 3 secondes
+        setTimeout(() => {
+          this.showConfirmation = false;
+        }, 3000);
+      },
+      error: (error) => {
+        if (error.status === 401) {
+          this.router.navigate(['/login']);
+          return;
+        }
+        console.error('Erreur lors de l\'ajout au panier', error);
       },
     });
   }
