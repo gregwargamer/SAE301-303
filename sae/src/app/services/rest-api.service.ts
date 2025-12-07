@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ConfigService } from './config.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,27 +8,28 @@ import { Observable } from 'rxjs';
 })
 export class RestApiService {
 
-  private apiURL = 'http://localhost/sitevassil/Sans%20titre/SAE301-303/sushi_box/api/boxes/index.php';
-
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private config: ConfigService
+  ) {}
 
   getProducts(): Observable<any> {
-    return this.http.get(this.apiURL);
+    return this.http.get(this.config.boxesUrl);
   }
 
   getProduct(id: string): Observable<any> {
-    return this.http.get(`${this.apiURL}/${id}`);
+    return this.http.get(`${this.config.boxesUrl}/${id}`);
   }
 
   addProduct(product: any): Observable<any> {
-    return this.http.post(this.apiURL, product);
+    return this.http.post(this.config.boxesUrl, product);
   }
 
   updateProduct(id: string, product: any): Observable<any> {
-    return this.http.put(`${this.apiURL}/${id}`, product);
+    return this.http.put(`${this.config.boxesUrl}/${id}`, product);
   }
 
   deleteProduct(id: string): Observable<any> {
-    return this.http.delete(`${this.apiURL}/${id}`);
+    return this.http.delete(`${this.config.boxesUrl}/${id}`);
   }
 }

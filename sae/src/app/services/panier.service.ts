@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { ConfigService } from './config.service';
 
 export interface CartItem {
   id: number;
@@ -23,13 +24,16 @@ interface ListResponse {
   providedIn: 'root',
 })
 export class PanierService {
-  private apiUrl = 'http://localhost/sitevassil/Sans%20titre/SAE301-303/sushi_box/api/panier/index.php';
+  private apiUrl: string;
   private panierRefresh$ = new Subject<void>();
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private config: ConfigService
+  ) {
+    this.apiUrl = this.config.panierUrl;
+  }
 
   // met a jour le panier
   getPanierRefresh(): Observable<void> {

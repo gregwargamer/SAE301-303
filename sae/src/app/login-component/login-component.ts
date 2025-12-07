@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { ConfigService } from '../services/config.service';
 
 @Component({
   selector: 'app-login-component',
@@ -16,7 +17,10 @@ export class LoginComponent {
   errorMessage = '';
   loading = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private config: ConfigService
+  ) {}
 
   // connexion
   login(): void {
@@ -30,7 +34,7 @@ export class LoginComponent {
 
     this.http
       .post<{ success: boolean; token?: string; error?: string }>(
-        'http://localhost/sitevassil/Sans%20titre/SAE301-303/sushi_box/api/user/login.php',
+        this.config.loginUrl,
         {
           email: this.email,
           password: this.password,

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { ConfigService } from '../services/config.service';
 
 @Component({
   selector: 'app-register-component',
@@ -19,7 +20,10 @@ export class RegisterComponent {
   successMessage = '';
   loading = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private config: ConfigService
+  ) {}
 
   // inscription
   register(): void {
@@ -40,7 +44,7 @@ export class RegisterComponent {
 
     this.http
       .post<{ response?: string; error?: string }>(
-        'http://localhost/sitevassil/Sans%20titre/SAE301-303/sushi_box/api/user/add_user.php',
+        this.config.registerUrl,
         {
           firstname: this.firstname,
           email: this.email,
