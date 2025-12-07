@@ -20,9 +20,15 @@ global $pdo;
 $method = $_SERVER['REQUEST_METHOD'];
 $input = getJsonInput();
 
+// verifie l authentification pour toutes les requetes
+$user = getAuthenticatedUser($pdo);
+if (!$user) {
+    respondError('authentification requise', 401);
+}
+
 try {
     if ($method === 'GET') {
-        $panierId = ensurePanier($pdo);
+        $panierId = ensurePanier($pdo, $user['id']); //verifie si le panier existe et si il y a un utilisateur connecte
         respondJson(fetchPanierItems($pdo, $panierId));
     }
 
@@ -34,7 +40,7 @@ try {
         $boxId = (int)$input['boxId'];
         $quantity = isset($input['quantite']) ? max(1, (int)$input['quantite']) : 1;
 
-        $panierId = ensurePanier($pdo);
+        $panierId = ensurePanier($pdo, $user['id']);
 
         $pdo->beginTransaction();
 
@@ -43,7 +49,7 @@ try {
         $box = $boxStmt->fetch();
         if (!$box) {
             $pdo->rollBack();
-            respondError('Box introuvable', 404);
+            respondError('Box introuvable', 404); // envoi erreur si box non trouvee mais bon javoue cest sutout une idée du tab mais cest une bonne idée, merci tab
         }
 
         $existingStmt = $pdo->prepare('SELECT id, quantite FROM panier_articles WHERE panier_id = :panier AND box_id = :box');
@@ -81,7 +87,7 @@ try {
 
         $boxId = (int)$input['boxId'];
         $quantity = max(1, (int)$input['quantite']);
-        $panierId = ensurePanier($pdo);
+        $panierId = ensurePanier($pdo, $user['id']);
 
         $stmt = $pdo->prepare('UPDATE panier_articles SET quantite = :quantite WHERE panier_id = :panier AND box_id = :box');
         $stmt->execute([
@@ -104,7 +110,7 @@ try {
         }
 
         $boxId = (int)$payload['boxId'];
-        $panierId = ensurePanier($pdo);
+        $panierId = ensurePanier($pdo, $user['id']);
 
         $stmt = $pdo->prepare('DELETE FROM panier_articles WHERE panier_id = :panier AND box_id = :box');
         $stmt->execute([

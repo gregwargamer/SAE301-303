@@ -4,6 +4,7 @@ node_modules/
 # build outputs
 dist/
 /.angular/cache
+.angular/
 
 # logs
 npm-debug.log*
