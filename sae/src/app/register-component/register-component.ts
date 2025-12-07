@@ -12,7 +12,6 @@ import { RouterLink } from '@angular/router';
 })
 export class RegisterComponent {
   firstname = '';
-  lastname = '';
   email = '';
   password = '';
   confirmPassword = '';
@@ -24,10 +23,16 @@ export class RegisterComponent {
 
   // inscription
   register(): void {
-    if (!this.firstname || !this.lastname || !this.email || !this.password) {
+    if (!this.firstname || !this.email || !this.password) {
       this.errorMessage = 'rempli tous les champs';
       return;
     }
+
+    if (this.password !== this.confirmPassword) {
+      this.errorMessage = 'les mots de passe ne correspondent pas';
+      return;
+    }
+
 
     this.loading = true;
     this.errorMessage = '';
@@ -35,10 +40,9 @@ export class RegisterComponent {
 
     this.http
       .post<{ response?: string; error?: string }>(
-        'http://localhost/td3/sushi_box/api/user/add_user.php',
+        'http://localhost/sitevassil/Sans%20titre/SAE301-303/sushi_box/api/user/add_user.php',
         {
           firstname: this.firstname,
-          lastname: this.lastname,
           email: this.email,
           password: this.password,
         }

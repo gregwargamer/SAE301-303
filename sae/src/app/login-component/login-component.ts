@@ -30,7 +30,7 @@ export class LoginComponent {
 
     this.http
       .post<{ success: boolean; token?: string; error?: string }>(
-        'http://localhost/td3/sushi_box/api/user/login.php',
+        'http://localhost/sitevassil/Sans%20titre/SAE301-303/sushi_box/api/user/login.php',
         {
           email: this.email,
           password: this.password,

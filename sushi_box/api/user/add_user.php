@@ -16,8 +16,8 @@ $content = file_get_contents('php://input');
 
 $data = json_decode($content, true);
 
-// verification que tout est présent et non vide
-if (!isset($data['firstname'], $data['lastname'], $data['email'], $data['password']) || empty($data['firstname']) || empty($data['lastname']) || empty($data['email']) || empty($data['password'])) {
+// verification que tout est présent et non vide (sans lastname)
+if (!isset($data['firstname'], $data['email'], $data['password']) || empty($data['firstname']) || empty($data['email']) || empty($data['password'])) {
     // si des champs sont pas remplis ou vides
     http_response_code(400);
     header('Content-Type: application/json');
@@ -38,8 +38,9 @@ if ($userManager->findUserByEmail($data['email'])) {
 }
 //si n'existe pas 
 
-// appel de UserManager puis appel de createUser
-$success = $userManager->createUser($data['firstname'], $data['lastname'], $data['email'], $data['password']);
+// appel de UserManager puis appel de createUser (lastname optionnel)
+$lastname = isset($data['lastname']) ? $data['lastname'] : '';
+$success = $userManager->createUser($data['firstname'], $lastname, $data['email'], $data['password']);
 
 if ($success) {
     http_response_code(201);

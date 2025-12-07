@@ -3,6 +3,7 @@ import { CarteComponent } from './carte-component/carte-component';
 import { HomeComponent } from './home-component/home-component';
 import { LoginComponent } from './login-component/login-component';
 import { NouveautesComponent } from './nouveautes-component/nouveautes-component';
+import { PanierComponent } from './panier-component/panier-component';
 import { RegisterComponent } from './register-component/register-component';
 import { ReservationsComponent } from './reservations-component/reservations-component';
 
@@ -31,5 +32,8 @@ export const routes: Routes = [
     path: 'reservations',
     component: ReservationsComponent,
   },
+  {
+    path: 'panier',
+    component: PanierComponent,
+  },
 ];
-

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
@@ -23,7 +23,7 @@ interface ListResponse {
   providedIn: 'root',
 })
 export class PanierService {
-  private apiUrl = 'http://localhost/td3/sushi_box/api/panier/index.php';
+  private apiUrl = 'http://localhost/sitevassil/Sans%20titre/SAE301-303/sushi_box/api/panier/index.php';
   private panierRefresh$ = new Subject<void>();
 
   constructor(

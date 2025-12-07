@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class RestApiService {
 
-  private apiURL = 'http://localhost/td3/sushi_box/api/boxes/index.php';
+  private apiURL = 'http://localhost/sitevassil/Sans%20titre/SAE301-303/sushi_box/api/boxes/index.php';
 
   constructor(private http: HttpClient) {}
 
