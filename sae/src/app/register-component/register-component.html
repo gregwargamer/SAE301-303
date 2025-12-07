@@ -1,5 +1,4 @@
 <main class="min-h-screen bg-[#f5e6e0] flex flex-col">
-  <!-- Hero Image avec titre -->
   <section class="relative h-64">
     <div class="absolute inset-0 bg-gradient-to-b from-gray-800/60 to-transparent"></div>
     <div class="w-full h-full bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 flex items-center justify-center">
@@ -10,10 +9,8 @@
     </div>
   </section>
 
-  <!-- Formulaire d'inscription -->
   <section class="flex-1 flex items-start justify-center -mt-12 px-4 pb-8">
     <div class="bg-[#f5e6e0]/90 backdrop-blur-sm rounded-3xl shadow-lg p-8 w-full max-w-lg">
-      <!-- Onglet Inscription -->
       <div class="flex justify-center mb-6">
         <div class="bg-[#e8d4cc] rounded-full px-8 py-3">
           <h2 class="text-xl font-medium text-gray-600">Inscription</h2>
@@ -21,7 +18,6 @@
       </div>
 
       <form (ngSubmit)="register()" class="space-y-4">
-        <!-- Nom d'utilisateur -->
         <div>
           <input
             type="text"
@@ -33,7 +29,6 @@
           />
         </div>
 
-        <!-- Email -->
         <div>
           <input
             type="email"
@@ -45,7 +40,6 @@
           />
         </div>
 
-        <!-- Mot de passe -->
         <div class="relative">
           <input
             type="password"
@@ -62,7 +56,6 @@
           </button>
         </div>
 
-        <!-- Confirmation mot de passe -->
         <div class="relative">
           <input
             type="password"
@@ -79,7 +72,6 @@
           </button>
         </div>
 
-        <!-- Checkboxes -->
         <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
           <label class="flex items-center gap-2 text-gray-600 text-sm">
             <input type="checkbox" class="w-4 h-4 rounded border-gray-300">
@@ -97,11 +89,9 @@
           </label>
         </div>
 
-        <!-- Messages -->
         <p *ngIf="errorMessage" class="text-red-500 text-center text-sm">{{ errorMessage }}</p>
         <p *ngIf="successMessage" class="text-green-500 text-center text-sm">{{ successMessage }}</p>
 
-        <!-- Bouton S'inscrire -->
         <div class="flex justify-center pt-4">
           <button 
             type="submit" 
@@ -112,7 +102,6 @@
         </div>
       </form>
 
-      <!-- Lien connexion -->
       <div class="text-center mt-6">
         <p class="text-gray-600 mb-2">Déjà Inscrit ?</p>
         <a routerLink="/login" class="text-gray-500 underline hover:text-gray-700">Se connecter</a>
