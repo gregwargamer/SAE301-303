@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { PanierService, CartItem } from '../services/panier.service';
-import { AuthService } from '../services/auth.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { CartItem, PanierService } from '../services/panier.service';
 
 @Component({
   selector: 'app-panier-component',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './panier-component.html',
   styleUrl: './panier-component.css',
 })
