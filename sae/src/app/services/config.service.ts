@@ -4,8 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ConfigService {
-  readonly apiBase = 'http://localhost/sitevassil/Sans%20titre/SAE301-303/sushi_box/api';
- //readonly apiBase = 'http://localhost/SAE301-303/sushi_box/api';
+  //readonly apiBase = 'http://localhost/sitevassil/Sans%20titre/SAE301-303/sushi_box/api';
+  //readonly apiBase = 'http://localhost/SAE301-303/sushi_box/api';
+  readonly apiBase = 'http://localhost/sushi/SAE301-303/sushi_box/api';
 
   readonly boxesUrl = `${this.apiBase}/boxes/index.php`;
 
