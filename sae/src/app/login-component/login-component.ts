@@ -16,6 +16,11 @@ export class LoginComponent {
   password = '';
   errorMessage = '';
   loading = false;
+  showPassword = false;
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
 
   constructor(
     private http: HttpClient,
