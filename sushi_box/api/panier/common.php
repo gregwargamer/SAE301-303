@@ -1,7 +1,6 @@
 <?php
 
 require_once __DIR__ . '/../../config/connexion-db.php';
-require_once __DIR__ . '/../Manager/UserManager.php';
 
 function getJsonInput(): array
 {
@@ -32,47 +31,19 @@ function respondError(string $message, int $status = 400): void
     respondJson(['error' => $message], $status);
 }
 
-// verifie le token et donen luser
-function getAuthenticatedUser(PDO $pdo): ?array
+function ensurePanier(PDO $pdo): int
 {
-    $headers = getallheaders() ?: [];
-    
-    //cherche le token dans la requete http et si pas de token, cherche dans server 
-    if (!isset($headers['Authorization'])) {
-        $headers['Authorization'] = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? null;
-    }
-    
-    if (empty($headers['Authorization'])) {
-        return null;
-    }
-
-    $authHeader = $headers['Authorization'];
-    $token = str_replace('Bearer ', '', $authHeader);
-    
-    if (empty($token)) {
-        return null;
-    }
-
-    $userManager = new UserManager();
-    $user = $userManager->findUserByToken($token);
-
-    return $user ?: null;
-}
-
-function ensurePanier(PDO $pdo, int $userId): int
-{
-    // cherche le panier ouvert de luser
-    $stmt = $pdo->prepare('SELECT id FROM panier WHERE status = "OUVERT" AND utilisateur_id = :user_id LIMIT 1');
-    $stmt->execute(['user_id' => $userId]);
+    $stmt = $pdo->prepare('SELECT id FROM panier WHERE status = "OUVERT" LIMIT 1');
+    $stmt->execute();
     $panierId = $stmt->fetchColumn();
 
     if ($panierId) {
         return (int)$panierId;
     }
 
-    // cree un nouveau panier pour luser
-    $insert = $pdo->prepare('INSERT INTO panier (utilisateur_id) VALUES (:user_id)');
-    $insert->execute(['user_id' => $userId]);
+    $insert = $pdo->prepare('INSERT INTO panier (utilisateur_id) VALUES (NULL)');
+    $insert->execute();
+
     return (int)$pdo->lastInsertId();
 }
 

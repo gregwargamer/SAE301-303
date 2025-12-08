@@ -1,0 +1,8 @@
+name = "basesae-api"
+main = "src/index.mjs"
+compatibility_date = "2024-09-02"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "basesae"
+database_id = "c741427e-ab63-4b30-81f2-4b09054c5def"

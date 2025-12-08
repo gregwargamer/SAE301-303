@@ -20,15 +20,9 @@ global $pdo;
 $method = $_SERVER['REQUEST_METHOD'];
 $input = getJsonInput();
 
-// verifie l authentification pour toutes les requetes
-$user = getAuthenticatedUser($pdo);
-if (!$user) {
-    respondError('authentification requise', 401);
-}
-
 try {
     if ($method === 'GET') {
-        $panierId = ensurePanier($pdo, $user['id']); //verifie si le panier existe et si il y a un utilisateur connecte
+        $panierId = ensurePanier($pdo);
         respondJson(fetchPanierItems($pdo, $panierId));
     }
 
@@ -40,7 +34,7 @@ try {
         $boxId = (int)$input['boxId'];
         $quantity = isset($input['quantite']) ? max(1, (int)$input['quantite']) : 1;
 
-        $panierId = ensurePanier($pdo, $user['id']);
+        $panierId = ensurePanier($pdo);
 
         $pdo->beginTransaction();
 
@@ -49,7 +43,7 @@ try {
         $box = $boxStmt->fetch();
         if (!$box) {
             $pdo->rollBack();
-            respondError('Box introuvable', 404); // envoi erreur si box non trouvee mais bon javoue cest sutout une idée du tab mais cest une bonne idée, merci tab
+            respondError('Box introuvable', 404);
         }
 
         $existingStmt = $pdo->prepare('SELECT id, quantite FROM panier_articles WHERE panier_id = :panier AND box_id = :box');
@@ -80,29 +74,6 @@ try {
         respondJson(fetchPanierItems($pdo, $panierId));
     }
 
-    if ($method === 'PUT') {
-        if (!isset($input['boxId'], $input['quantite'])) {
-            respondError("boxId and quantite are required");
-        }
-
-        $boxId = (int)$input['boxId'];
-        $quantity = max(1, (int)$input['quantite']);
-        $panierId = ensurePanier($pdo, $user['id']);
-
-        $stmt = $pdo->prepare('UPDATE panier_articles SET quantite = :quantite WHERE panier_id = :panier AND box_id = :box');
-        $stmt->execute([
-            'quantite' => $quantity,
-            'panier' => $panierId,
-            'box' => $boxId,
-        ]);
-
-        if ($stmt->rowCount() === 0) {
-            respondError('Article absent du panier', 404);
-        }
-
-        respondJson(fetchPanierItems($pdo, $panierId));
-    }
-
     if ($method === 'DELETE') {
         $payload = $input ?: getJsonInput();
         if (!isset($payload['boxId'])) {
@@ -110,7 +81,7 @@ try {
         }
 
         $boxId = (int)$payload['boxId'];
-        $panierId = ensurePanier($pdo, $user['id']);
+        $panierId = ensurePanier($pdo);
 
         $stmt = $pdo->prepare('DELETE FROM panier_articles WHERE panier_id = :panier AND box_id = :box');
         $stmt->execute([

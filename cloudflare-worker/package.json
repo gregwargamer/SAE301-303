@@ -1,0 +1,17 @@
+{
+  "name": "basesae-api",
+  "version": "1.0.0",
+  "description": "api cloudflare d1 pour basesae",
+  "main": "src/index.mjs",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev --local"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "bcryptjs": "^3.0.3"
+  }
+}

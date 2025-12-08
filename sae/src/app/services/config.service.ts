@@ -5,11 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class ConfigService {
   //readonly apiBase = 'http://localhost/sitevassil/Sans%20titre/SAE301-303/sushi_box/api';
-  //readonly apiBase = 'http://localhost/SAE301-303/sushi_box/api';
-  readonly apiBase = 'http://localhost/sushi/SAE301-303/sushi_box/api';
+  readonly apiBase = 'https://basesae-api.9265cwwfn9.workers.dev';
 
   readonly boxesUrl = `${this.apiBase}/boxes/index.php`;
   readonly boxDetailUrl = `${this.apiBase}/boxes/get.php`;
+
 
   readonly panierUrl = `${this.apiBase}/panier/index.php`;
   readonly loginUrl = `${this.apiBase}/user/login.php`;
