@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { PanierService } from '../services/panier.service';
 import { RestApiService } from '../services/rest-api.service';
@@ -16,7 +16,7 @@ interface Box {
 
 @Component({
   selector: 'app-menu-component',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './menu-component.html',
   styleUrl: './menu-component.css',
 })

@@ -1,0 +1,138 @@
+<main class="min-h-screen bg-[#f5e6e0]">
+  <!-- Hero Image -->
+  <section class="relative h-64">
+    <div class="w-full h-full bg-cover bg-center" style="background-image: url('/medias/sushi-2853382_1920.webp');">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/30 to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- Loading state -->
+  <div *ngIf="loading" class="flex justify-center items-center py-20">
+    <div class="animate-spin rounded-full h-12 w-12 border-4 border-[#c9a8a3] border-t-transparent"></div>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error && !loading" class="text-center py-20">
+    <p class="text-red-500 text-lg">{{ error }}</p>
+    <a routerLink="/carte" class="mt-4 inline-block px-6 py-2 bg-[#c9a8a3] text-white rounded-full hover:bg-[#b8978f] transition-colors">
+      Retour à la carte
+    </a>
+  </div>
+
+  <!-- Product content -->
+  <section *ngIf="product && !loading" class="px-4 py-6 -mt-8 relative">
+    <!-- Product name badge -->
+    <div class="flex justify-center mb-6">
+      <div class="bg-[#e8d4cc] rounded-full px-8 py-3 shadow-md">
+        <h1 class="text-2xl font-semibold text-gray-700">{{ product.name }}</h1>
+      </div>
+    </div>
+
+    <!-- Product details container -->
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Left: Image + Description -->
+      <div>
+        <div class="rounded-2xl overflow-hidden shadow-lg mb-6">
+          <img src="/medias/sushi-2853382_1920.webp" alt="{{ product.name }}" class="w-full h-64 object-cover">
+        </div>
+        
+        <div class="text-gray-600 text-sm leading-relaxed">
+          <p>{{ product.description || 'Une délicieuse sélection de sushis préparés avec des ingrédients frais et de qualité. Parfait pour une dégustation entre amis ou en famille.' }}</p>
+          
+          <!-- Foods list -->
+          <div *ngIf="product.foods && product.foods.length > 0" class="mt-4">
+            <p class="font-medium text-gray-700 mb-2">Composition :</p>
+            <ul class="list-disc list-inside">
+              <li *ngFor="let food of product.foods">{{ food.quantity }}x {{ food.name }}</li>
+            </ul>
+          </div>
+
+          <!-- Flavors -->
+          <div *ngIf="product.flavors && product.flavors.length > 0" class="mt-4">
+            <p class="font-medium text-gray-700 mb-2">Saveurs :</p>
+            <div class="flex flex-wrap gap-2">
+              <span *ngFor="let flavor of product.flavors" class="px-3 py-1 bg-[#c9a8a3] text-white text-xs rounded-full">
+                {{ flavor }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Price + Actions -->
+      <div class="flex flex-col gap-4">
+        <!-- Stock status -->
+        <p class="text-green-600 font-medium">en stock</p>
+
+        <!-- Price -->
+        <div class="flex items-center gap-4">
+          <span class="text-gray-600">Prix :</span>
+          <span class="bg-[#e8d4cc] px-6 py-2 rounded-full text-gray-700 font-medium">
+            {{ product.price }}€
+          </span>
+        </div>
+
+        <!-- Quantity selector -->
+        <div class="flex items-center gap-4">
+          <span class="text-gray-600">Quantité :</span>
+          <div class="flex items-center bg-[#d4b5ae] rounded-full overflow-hidden">
+            <button (click)="decreaseQuantity()" class="px-4 py-2 text-white hover:bg-[#c9a8a3] transition-colors">
+              -
+            </button>
+            <span class="px-6 py-2 text-white font-medium">{{ quantity }}</span>
+            <button (click)="increaseQuantity()" class="px-4 py-2 text-white hover:bg-[#c9a8a3] transition-colors">
+              +
+            </button>
+          </div>
+        </div>
+
+        <!-- Pay button -->
+        <button 
+          (click)="addToCart()"
+          class="w-full py-3 bg-[#d4b5ae] text-white font-medium rounded-full hover:bg-[#c9a8a3] transition-colors shadow-md">
+          PAYER
+        </button>
+
+        <!-- Payment icons -->
+        <div class="flex items-center gap-4 mt-2">
+          <svg class="w-6 h-6 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+          </svg>
+          <svg class="w-6 h-6 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          <span class="text-xs text-gray-400 ml-2">Paiement sécurisé</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Similar products section -->
+  <section *ngIf="similarProducts.length > 0" class="px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex justify-center mb-6">
+        <div class="bg-[#d4b5ae] rounded-full px-8 py-3 shadow-md">
+          <h2 class="text-lg font-medium text-white">Produits similaires</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a *ngFor="let item of similarProducts" 
+           [routerLink]="['/produit', item.id]"
+           class="block rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow cursor-pointer">
+          <img src="/medias/sushi-2853382_1920.webp" alt="{{ item.name }}" class="w-full h-40 object-cover">
+          <div class="p-3 bg-[#e8d4cc]">
+            <h3 class="font-medium text-gray-700">{{ item.name }}</h3>
+            <p class="text-sm text-[#c9a8a3]">{{ item.price }}€</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Confirmation message -->
+  <div *ngIf="showConfirmation" 
+       class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg animate-pulse z-50">
+    ✓ Produit ajouté au panier !
+  </div>
+</main>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ConfigService } from './config.service';
 import { Observable } from 'rxjs';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class RestApiService {
   }
 
   getProduct(id: string): Observable<any> {
-    return this.http.get(`${this.config.boxesUrl}/${id}`);
+    return this.http.get(`${this.config.boxDetailUrl}?id=${id}`);
   }
 
   addProduct(product: any): Observable<any> {
