@@ -9,6 +9,7 @@ export class ConfigService {
   readonly apiBase = 'http://localhost/sushi/SAE301-303/sushi_box/api';
 
   readonly boxesUrl = `${this.apiBase}/boxes/index.php`;
+  readonly boxDetailUrl = `${this.apiBase}/boxes/get.php`;
 
   readonly panierUrl = `${this.apiBase}/panier/index.php`;
   readonly loginUrl = `${this.apiBase}/user/login.php`;
