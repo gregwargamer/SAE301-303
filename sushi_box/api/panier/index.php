@@ -74,6 +74,38 @@ try {
         respondJson(fetchPanierItems($pdo, $panierId));
     }
 
+    if ($method === 'PUT') {
+        if (!isset($input['boxId']) || !isset($input['quantite'])) {
+            respondError("boxId and quantite are required");
+        }
+
+        $boxId = (int)$input['boxId'];
+        $quantite = max(1, (int)$input['quantite']);
+        $panierId = ensurePanier($pdo);
+
+        $pdo->beginTransaction();
+
+        // verifie que dans panier
+        $existingStmt = $pdo->prepare('SELECT id FROM panier_articles WHERE panier_id = :panier AND box_id = :box');
+        $existingStmt->execute(['panier' => $panierId, 'box' => $boxId]);
+        $existing = $existingStmt->fetch();
+
+        if (!$existing) { //si existe pas erreur mais vasy jsp si c vraitemnt utile
+            $pdo->rollBack();
+            respondError('Article non trouvé dans le panier', 404);
+        }
+
+        // met a jour la quantite
+        $updateStmt = $pdo->prepare('UPDATE panier_articles SET quantite = :quantite WHERE id = :id');
+        $updateStmt->execute([
+            'quantite' => $quantite,
+            'id' => $existing['id'],
+        ]);
+
+        $pdo->commit();
+        respondJson(fetchPanierItems($pdo, $panierId));
+    }
+
     if ($method === 'DELETE') {
         $payload = $input ?: getJsonInput();
         if (!isset($payload['boxId'])) {

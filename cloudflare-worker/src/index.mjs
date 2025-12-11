@@ -72,6 +72,49 @@ async function handleBoxes(env) {
   return json(boxes);
 }
 
+async function handleBoxDetail(env, id) {
+  if (!id) {
+    return error("id requis", 400);
+  }
+
+  const boxId = Number(id);
+
+  const box = await env.DB.prepare(
+    "SELECT id, name, pieces, price, image FROM boxes WHERE id = ?"
+  )
+    .bind(boxId)
+    .first();
+
+  if (!box) {
+    return error("box introuvable", 404);
+  }
+
+  const foodsRes = await env.DB.prepare(
+    "SELECT f.name, bf.quantity FROM box_foods bf JOIN foods f ON bf.food_id = f.id WHERE bf.box_id = ?"
+  )
+    .bind(boxId)
+    .all();
+
+  const flavorsRes = await env.DB.prepare(
+    "SELECT fl.name FROM box_flavors bf JOIN flavors fl ON bf.flavor_id = fl.id WHERE bf.box_id = ?"
+  )
+    .bind(boxId)
+    .all();
+
+  const payload = {
+    ...box,
+    price: Number(box.price),
+    pieces: Number(box.pieces),
+    foods: (foodsRes.results ?? []).map((row) => ({
+      name: row.name,
+      quantity: Number(row.quantity),
+    })),
+    flavors: (flavorsRes.results ?? []).map((row) => row.name),
+  };
+
+  return json({ success: true, data: payload });
+}
+
 async function getUserFromAuth(env, request) {
   const header = request.headers.get("Authorization");
   if (!header || !header.startsWith("Bearer ")) return null;
@@ -292,6 +335,15 @@ export default {
     if (pathname === "/boxes" || pathname === "/api/boxes" || pathname === "/boxes/index.php") {
       try {
         return await handleBoxes(env);
+      } catch (err) {
+        return error("erreur serveur", 500);
+      }
+    }
+
+    if (pathname === "/boxes/get.php" || pathname === "/boxes/get" || pathname === "/api/boxes/get") {
+      try {
+        const id = url.searchParams.get("id");
+        return await handleBoxDetail(env, id);
       } catch (err) {
         return error("erreur serveur", 500);
       }

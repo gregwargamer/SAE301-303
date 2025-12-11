@@ -1,0 +1,25 @@
+# Node modules
+sae/node_modules/
+
+# Angular build outputs
+sae/dist/
+sae/.angular/
+
+# Logs
+sae/npm-debug.log*
+sae/yarn-debug.log*
+
+# Environment files
+sae/.env
+sae/.env.local
+sae/.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
