@@ -10,6 +10,8 @@ interface Box {
   name: string;
   pieces: string;
   price: number;
+  lien_image?: string;
+  description?: string;
   foods: Array<{ name: string; quantity: string }>;
   flavors: string[];
 }
@@ -70,7 +72,7 @@ export class MenuComponent implements OnInit {
       next: () => {
         // Affiche le message de confirmation
         this.showConfirmation = true;
-        
+
         // Cache le message après 3 secondes
         setTimeout(() => {
           this.showConfirmation = false;

@@ -1,6 +1,7 @@
 <main class="bg-[#f5e6e0] min-h-screen">
   <section class="relative">
-    <div class="w-full h-40 bg-cover bg-center flex flex-col items-center justify-center" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0)), url('/medias/sushi-2853382_1920.webp');">
+    <div class="w-full h-40 bg-cover bg-center flex flex-col items-center justify-center"
+      style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0)), url('/medias/sushi-2853382_1920.webp');">
       <h1 class="text-3xl font-bold text-white">Tout les produits Eishi</h1>
       <p class="text-xl italic text-white mt-2">à la carte</p>
     </div>
@@ -11,24 +12,28 @@
       <div class="flex items-center bg-white rounded-full px-4 py-2 shadow-sm border border-gray-300">
         <input type="text" placeholder="Rechercher un plat" class="bg-transparent outline-none text-gray-600 w-40">
         <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
       </div>
-      
-      <select class="bg-white rounded-full px-4 py-2 text-gray-600 shadow-sm outline-none cursor-pointer border border-gray-300">
+
+      <select
+        class="bg-white rounded-full px-4 py-2 text-gray-600 shadow-sm outline-none cursor-pointer border border-gray-300">
         <option>Par taille</option>
         <option>Petit</option>
         <option>Moyen</option>
         <option>Grand</option>
       </select>
-      
-      <select class="bg-white rounded-full px-4 py-2 text-gray-600 shadow-sm outline-none cursor-pointer border border-gray-300">
+
+      <select
+        class="bg-white rounded-full px-4 py-2 text-gray-600 shadow-sm outline-none cursor-pointer border border-gray-300">
         <option>Par prix</option>
         <option>Croissant</option>
         <option>Décroissant</option>
       </select>
-      
-      <select class="bg-white rounded-full px-4 py-2 text-gray-600 shadow-sm outline-none cursor-pointer border border-gray-300">
+
+      <select
+        class="bg-white rounded-full px-4 py-2 text-gray-600 shadow-sm outline-none cursor-pointer border border-gray-300">
         <option>Par catégories</option>
         <option>Sushis</option>
         <option>Makis</option>
@@ -40,69 +45,28 @@
   <section class="py-8 px-6">
     <div class="max-w-6xl mx-auto">
       <h2 class="text-xl font-bold text-gray-800 mb-6">Nos produits</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div *ngFor="let box of boxes; let i = index" 
-             [routerLink]="['/produit', box.id]"
-             class="bg-[#e8d4cc] rounded-2xl overflow-hidden shadow-sm cursor-pointer hover:shadow-lg transition-shadow">
-          <div class="flex">
-            <div class="w-24 h-24 bg-gray-300 flex-shrink-0 rounded-lg m-2 flex items-center justify-center overflow-hidden">
-              <span class="text-gray-500 text-xs">Image</span>
-            </div>
-            
-            <div class="p-2 flex-1">
-              <h3 class="font-semibold text-sm mb-1 text-[#c9a8a3]">{{ box.name }}</h3>
-              <p class="text-xs text-gray-600 leading-tight">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-              </p>
-            </div>
-          </div>
-          
-          <div class="flex justify-between items-center px-3 pb-2">
-            <button 
-              (click)="addToCartAndReservation(box); $event.stopPropagation()"
-              class="flex items-center gap-1 px-3 py-1 bg-[#c9a8a3] text-white text-xs rounded-full hover:bg-[#b8978f] transition-colors">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-              </svg>
-              Réserver
-            </button>
-            <span class="bg-white px-3 py-1 rounded-full text-sm font-medium text-gray-700 shadow-sm">
-              {{ box.price }}€
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="py-6 px-6 pb-16">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-xl font-bold text-gray-800 mb-6">Nos boxs</h2>
-      
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div *ngFor="let box of boxes" 
-             [routerLink]="['/produit', box.id]"
-             class="bg-[#e8d4cc] rounded-2xl overflow-hidden shadow-sm cursor-pointer hover:shadow-lg transition-shadow">
+        <div *ngFor="let box of boxes; let i = index" [routerLink]="['/produit', box.id]"
+          class="bg-[#e8d4cc] rounded-2xl overflow-hidden shadow-sm cursor-pointer hover:shadow-lg transition-shadow">
           <div class="flex">
-            <div class="w-24 h-24 bg-gray-300 flex-shrink-0 rounded-lg m-2 flex items-center justify-center overflow-hidden">
-              <span class="text-gray-500 text-xs">Image</span>
+            <div class="w-24 h-24 flex-shrink-0 rounded-lg m-2 overflow-hidden">
+              <img [src]="box.lien_image" [alt]="box.name" class="w-full h-full object-cover">
             </div>
-            
+
             <div class="p-2 flex-1">
               <h3 class="font-semibold text-sm mb-1 text-[#c9a8a3]">{{ box.name }}</h3>
               <p class="text-xs text-gray-600 leading-tight">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                {{ box.description || 'Délicieuse sélection de sushis frais et savoureux.' }}
               </p>
             </div>
           </div>
-          
+
           <div class="flex justify-between items-center px-3 pb-2">
-            <button 
-              (click)="addToCartAndReservation(box); $event.stopPropagation()"
+            <button (click)="addToCartAndReservation(box); $event.stopPropagation()"
               class="flex items-center gap-1 px-3 py-1 bg-[#c9a8a3] text-white text-xs rounded-full hover:bg-[#b8978f] transition-colors">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
               Réserver
             </button>
@@ -116,8 +80,8 @@
   </section>
 
   <!-- Message de confirmation -->
-  <div *ngIf="showConfirmation" 
-       class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg animate-pulse">
+  <div *ngIf="showConfirmation"
+    class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg animate-pulse">
     ✓ Produit ajouté au panier et à la réservation !
   </div>
 </main>

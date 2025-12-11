@@ -10,6 +10,7 @@ interface Box {
   name: string;
   pieces: string;
   price: number;
+  lien_image?: string;
   description?: string;
   foods: Array<{ name: string; quantity: string }>;
   flavors: string[];
