@@ -233,6 +233,8 @@ CREATE TABLE commandes (
   prenom TEXT NOT NULL,
   telephone TEXT,
   adresse TEXT,
+  code_postal TEXT,
+  ville TEXT,
   total REAL,
   status_commande TEXT,
   date_commande TEXT DEFAULT CURRENT_TIMESTAMP,

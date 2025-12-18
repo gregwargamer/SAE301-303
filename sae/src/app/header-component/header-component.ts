@@ -25,4 +25,9 @@ export class HeaderComponent {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
+  // recupere le prenom utilisateur
+  getUsername(): string {
+    return this.authService.getFirstname();
+  }
 }

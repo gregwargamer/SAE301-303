@@ -38,7 +38,7 @@ export class LoginComponent {
     this.errorMessage = '';
 
     this.http
-      .post<{ success: boolean; token?: string; error?: string }>(
+      .post<{ success: boolean; token?: string; firstname?: string; lastname?: string; error?: string }>(
         this.config.loginUrl,
         {
           email: this.email,
@@ -49,6 +49,12 @@ export class LoginComponent {
         next: (response) => {
           if (response.success && response.token) {
             localStorage.setItem('auth_token', response.token);
+            if (response.firstname) {
+              localStorage.setItem('user_firstname', response.firstname);
+            }
+            if (response.lastname) {
+              localStorage.setItem('user_lastname', response.lastname);
+            }
             window.location.href = '/';
           } else {
             this.errorMessage = response.error || 'erreur de connexion';

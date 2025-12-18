@@ -29,7 +29,10 @@
           Créer un compte
         </a>
       </ng-container>
-    
+      <!-- afficher nom utilisateur si connecte -->
+      <ng-container *ngIf="isAuthenticated()">
+        <p class="text-gray-700 font-medium">{{ getUsername() }}</p>
+      </ng-container>
       <ng-container *ngIf="isAuthenticated()">
         <button (click)="logout()" class="px-4 py-2 border border-gray-600 rounded-full text-gray-700 font-medium hover:bg-gray-700 hover:text-white transition-colors text-sm">
           Déconnexion
@@ -37,4 +40,4 @@
       </ng-container>
     </div>
   </nav>
-</header>
+</header> 

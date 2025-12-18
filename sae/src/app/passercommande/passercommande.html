@@ -1,0 +1,35 @@
+<h1>Passer commande</h1>
+
+<form [formGroup]="form" (ngSubmit)="passerCommande()">
+  <div>
+    <label for="telephone">Telephone</label>
+    <input type="text" id="telephone" formControlName="telephone">
+  </div>
+
+  <div>
+    <label for="adresse">Adresse</label>
+    <input type="text" id="adresse" formControlName="adresse">
+  </div>
+
+  <div>
+    <label for="code_postal">Code Postal</label>
+    <input type="text" id="code_postal" formControlName="code_postal" maxlength="5">
+  </div>
+
+  <div>
+    <label for="ville">Ville</label>
+    <input type="text" id="ville" formControlName="ville">
+  </div>
+
+  @if (error) {
+    <p>{{ error }}</p>
+  }
+
+  <button type="submit" [disabled]="loading">
+    @if (loading) {
+      Envoi en cours...
+    } @else {
+      Passer Commande
+    }
+  </button>
+</form>

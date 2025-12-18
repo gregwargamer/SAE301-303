@@ -1,0 +1,11 @@
+<h1>Commande confirmee</h1>
+
+<p>Merci pour votre commande !</p>
+
+@if (commandeId) {
+  <p>Numero de commande : {{ commandeId }}</p>
+}
+
+<p>Votre commande arrivera sous peu.</p>
+
+<a routerLink="/">Retour a l'accueil</a>

@@ -18,6 +18,18 @@ export class AuthService {
   // deconnexion
   logout(): void {
     localStorage.removeItem('auth_token');
+    localStorage.removeItem('user_firstname');
+    localStorage.removeItem('user_lastname');
+  }
+
+  // recupere le prenom
+  getFirstname(): string {
+    return localStorage.getItem('user_firstname') || '';
+  }
+
+  // recupere le nom
+  getLastname(): string {
+    return localStorage.getItem('user_lastname') || '';
   }
 }
 

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { CarteComponent } from './carte-component/carte-component';
+import { MenuComponent } from './menu-component/menu-component';
 import { HomeComponent } from './home-component/home-component';
 import { LoginComponent } from './login-component/login-component';
 import { NouveautesComponent } from './nouveautes-component/nouveautes-component';
@@ -7,6 +7,8 @@ import { PanierComponent } from './panier-component/panier-component';
 import { ProductComponent } from './product-component/product-component';
 import { RegisterComponent } from './register-component/register-component';
 import { ReservationsComponent } from './reservations-component/reservations-component';
+import { Passercommande } from './passercommande/passercommande';
+import { ConfirmationComponent } from './confirmation/confirmation';
 
 export const routes: Routes = [
   {
@@ -23,7 +25,7 @@ export const routes: Routes = [
   },
   {
     path: 'carte',
-    component: CarteComponent,
+    component: MenuComponent,
   },
   {
     path: 'produit/:id',
@@ -40,6 +42,14 @@ export const routes: Routes = [
   {
     path: 'panier',
     component: PanierComponent,
+  },
+  {
+    path: 'commander',
+    component: Passercommande,
+  },
+  {
+    path: 'confirmation',
+    component: ConfirmationComponent,
   },
 ];
 
