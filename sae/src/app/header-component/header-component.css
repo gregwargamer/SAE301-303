@@ -1,0 +1,28 @@
+/* Header Component Styles */
+
+/* Navigation links style */
+.nav-link {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #1a1a1a;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.active-link::after {
+  width: 100%;
+}
+
+.active-link {
+  color: #1a1a1a !important;
+  font-weight: 600;
+}

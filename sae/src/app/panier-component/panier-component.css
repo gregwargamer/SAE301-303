@@ -1,22 +1,15 @@
-.panier {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem;
-  margin-top: 2rem;
+/* Panier Component Styles */
+
+/* Spinner animation */
+.animate-spin {
+  animation: spin 1s linear infinite;
 }
 
-.panier__item {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.panier__item:last-child {
-  border-bottom: none;
-}
-
-.panier__actions button {
-  margin-left: 0.5rem;
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

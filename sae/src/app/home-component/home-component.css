@@ -1,1 +1,22 @@
-/* Styles pour la page d'accueil */
+/* Home Component Styles */
+
+/* Hero animations */
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animation-delay-200 {
+  animation-delay: 0.2s;
+}

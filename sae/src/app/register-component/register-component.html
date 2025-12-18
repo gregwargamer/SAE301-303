@@ -1,111 +1,143 @@
-<main class="min-h-screen bg-[#f5e6e0] flex flex-col">
-  <section class="relative h-64">
-    <div class="absolute inset-0 bg-gradient-to-b from-gray-800/60 to-transparent"></div>
-    <div class="w-full h-full bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 flex items-center justify-center">
-      <div class="text-center text-white z-10">
-        <h1 class="text-4xl font-bold italic">Nous</h1>
-        <p class="text-4xl font-bold italic">rejoindre</p>
-      </div>
-    </div>
-  </section>
+<main class="min-h-screen bg-[#1A1A1A] seigaiha-pattern flex items-center justify-center py-16 px-6">
+  <!-- Japanese decoration -->
+  <div class="japanese-decoration" aria-hidden="true">
+    登録する
+  </div>
 
-  <section class="flex-1 flex items-start justify-center -mt-12 px-4 pb-8">
-    <div class="bg-[#f5e6e0]/90 backdrop-blur-sm rounded-3xl shadow-lg p-8 w-full max-w-lg">
-      <div class="flex justify-center mb-6">
-        <div class="bg-[#e8d4cc] rounded-full px-8 py-3">
-          <h2 class="text-xl font-medium text-gray-600">Inscription</h2>
-        </div>
+  <div class="w-full max-w-lg relative z-10">
+    <!-- Card -->
+    <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-10">
+      <!-- Logo -->
+      <div class="text-center mb-8">
+        <img src="../../medias/eishi.png" alt="Eishi" class="w-16 h-16 mx-auto mb-4">
+        <h1 class="font-['Playfair_Display'] text-3xl font-bold text-white">Rejoignez-nous</h1>
+        <p class="text-gray-400 mt-2">Créez votre compte Eishi</p>
       </div>
 
-      <form (ngSubmit)="register()" class="space-y-4">
+      <!-- Form -->
+      <form (ngSubmit)="register()" class="space-y-5">
         <div>
+          <label class="block text-gray-300 text-sm mb-2">Nom d'utilisateur</label>
           <input
             type="text"
             [(ngModel)]="firstname"
             name="firstname"
-            placeholder="Entrez votre nom d'utilisateur"
+            placeholder="Votre nom"
             required
-            class="w-full px-6 py-3 bg-[#d4b5ae] rounded-full text-center text-white placeholder-white/70 outline-none focus:ring-2 focus:ring-[#c9a8a3]"
+            class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl text-white 
+                   placeholder-gray-500 outline-none focus:border-[#E8722A] transition-colors"
           />
         </div>
 
         <div>
+          <label class="block text-gray-300 text-sm mb-2">Email</label>
           <input
             type="email"
             [(ngModel)]="email"
             name="email"
-            placeholder="Entrez votre Email"
+            placeholder="votre@email.com"
             required
-            class="w-full px-6 py-3 bg-[#d4b5ae] rounded-full text-center text-white placeholder-white/70 outline-none focus:ring-2 focus:ring-[#c9a8a3]"
+            class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl text-white 
+                   placeholder-gray-500 outline-none focus:border-[#E8722A] transition-colors"
           />
         </div>
 
-        <div class="relative">
-          <input
-            type="password"
-            [(ngModel)]="password"
-            name="password"
-            placeholder="Entrez un mot de passe"
-            required
-            class="w-full px-6 py-3 bg-[#d4b5ae] rounded-full text-center text-white placeholder-white/70 outline-none focus:ring-2 focus:ring-[#c9a8a3]"
-          />
-          <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/70">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
-            </svg>
-          </button>
+        <div>
+          <label class="block text-gray-300 text-sm mb-2">Mot de passe</label>
+          <div class="relative">
+            <input
+              type="password"
+              [(ngModel)]="password"
+              name="password"
+              placeholder="••••••••"
+              required
+              class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl text-white 
+                     placeholder-gray-500 outline-none focus:border-[#E8722A] transition-colors pr-12"
+            />
+            <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+              </svg>
+            </button>
+          </div>
         </div>
 
-        <div class="relative">
-          <input
-            type="password"
-            [(ngModel)]="confirmPassword"
-            name="confirmPassword"
-            placeholder="Confirmation du mot de passe"
-            required
-            class="w-full px-6 py-3 bg-[#d4b5ae] rounded-full text-center text-white placeholder-white/70 outline-none focus:ring-2 focus:ring-[#c9a8a3]"
-          />
-          <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/70">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
-            </svg>
-          </button>
+        <div>
+          <label class="block text-gray-300 text-sm mb-2">Confirmer le mot de passe</label>
+          <div class="relative">
+            <input
+              type="password"
+              [(ngModel)]="confirmPassword"
+              name="confirmPassword"
+              placeholder="••••••••"
+              required
+              class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-xl text-white 
+                     placeholder-gray-500 outline-none focus:border-[#E8722A] transition-colors pr-12"
+            />
+          </div>
         </div>
 
-        <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
-          <label class="flex items-center gap-2 text-gray-600 text-sm">
-            <input type="checkbox" class="w-4 h-4 rounded border-gray-300">
-            <span>Etudiant</span>
+        <!-- Options -->
+        <div class="space-y-3 pt-2">
+          <label class="flex items-center gap-3 text-gray-400 text-sm cursor-pointer group">
+            <input type="checkbox" class="w-5 h-5 rounded border-white/20 bg-white/5 text-[#E8722A] focus:ring-[#E8722A]">
+            <span class="group-hover:text-gray-300 transition-colors">Je suis étudiant</span>
           </label>
           
-          <label class="flex items-center gap-2 text-gray-600 text-sm">
-            <input type="checkbox" class="w-4 h-4 rounded border-gray-300">
-            <span>Accepter les conditions générales d'utilisation</span>
+          <label class="flex items-center gap-3 text-gray-400 text-sm cursor-pointer group">
+            <input type="checkbox" class="w-5 h-5 rounded border-white/20 bg-white/5 text-[#E8722A] focus:ring-[#E8722A]">
+            <span class="group-hover:text-gray-300 transition-colors">J'accepte les conditions générales d'utilisation</span>
           </label>
           
-          <label class="flex items-center gap-2 text-gray-600 text-sm">
-            <input type="checkbox" class="w-4 h-4 rounded border-gray-300">
-            <span>Recevoir des offres par mail</span>
+          <label class="flex items-center gap-3 text-gray-400 text-sm cursor-pointer group">
+            <input type="checkbox" class="w-5 h-5 rounded border-white/20 bg-white/5 text-[#E8722A] focus:ring-[#E8722A]">
+            <span class="group-hover:text-gray-300 transition-colors">Recevoir des offres par email</span>
           </label>
         </div>
 
-        <p *ngIf="errorMessage" class="text-red-500 text-center text-sm">{{ errorMessage }}</p>
-        <p *ngIf="successMessage" class="text-green-500 text-center text-sm">{{ successMessage }}</p>
+        <!-- Messages -->
+        <p *ngIf="errorMessage" class="text-red-400 text-center text-sm bg-red-500/10 py-3 rounded-lg">
+          {{ errorMessage }}
+        </p>
+        <p *ngIf="successMessage" class="text-green-400 text-center text-sm bg-green-500/10 py-3 rounded-lg">
+          {{ successMessage }}
+        </p>
 
-        <div class="flex justify-center pt-4">
-          <button 
-            type="submit" 
-            [disabled]="loading"
-            class="px-12 py-3 bg-[#c9a8a3] text-white rounded-full font-medium hover:bg-[#b8978f] transition-colors disabled:opacity-50">
-            {{ loading ? 'Creation...' : "S'inscrire" }}
-          </button>
-        </div>
+        <!-- Submit button -->
+        <button 
+          type="submit" 
+          [disabled]="loading"
+          class="w-full py-4 bg-[#E8722A] text-white font-semibold rounded-full 
+                 hover:bg-[#D35F1A] transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/30
+                 disabled:opacity-50 disabled:cursor-not-allowed">
+          <span *ngIf="!loading">S'inscrire</span>
+          <span *ngIf="loading" class="flex items-center justify-center gap-2">
+            <svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Création...
+          </span>
+        </button>
       </form>
 
-      <div class="text-center mt-6">
-        <p class="text-gray-600 mb-2">Déjà Inscrit ?</p>
-        <a routerLink="/login" class="text-gray-500 underline hover:text-gray-700">Se connecter</a>
+      <!-- Divider -->
+      <div class="flex items-center gap-4 my-8">
+        <div class="flex-1 h-px bg-white/10"></div>
+        <span class="text-gray-500 text-sm">ou</span>
+        <div class="flex-1 h-px bg-white/10"></div>
+      </div>
+
+      <!-- Login link -->
+      <div class="text-center">
+        <p class="text-gray-400 mb-3">Déjà un compte ?</p>
+        <a routerLink="/login" 
+           class="inline-block px-8 py-3 border-2 border-[#E8722A] text-[#E8722A] font-medium rounded-full 
+                  hover:bg-[#E8722A] hover:text-white transition-all duration-300">
+          Se connecter
+        </a>
       </div>
     </div>
-  </section>
+  </div>
 </main>

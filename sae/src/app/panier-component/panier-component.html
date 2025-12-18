@@ -1,97 +1,145 @@
-<main class="bg-[#f5e6e0] min-h-screen py-8 px-6">
-  <h1 class="text-4xl font-light text-[#b8a39e] text-center mb-12 italic">Votre Panier</h1>
-
-  <div *ngIf="loading" class="text-center">
-    <p class="text-gray-600">Chargement...</p>
+<main class="bg-[#1A1A1A] min-h-screen seigaiha-pattern py-12 px-6">
+  <!-- Japanese decoration -->
+  <div class="japanese-decoration" aria-hidden="true">
+    カート
   </div>
 
-  <p *ngIf="errorMessage" class="text-red-500 text-center mb-4">{{ errorMessage }}</p>
+  <div class="max-w-5xl mx-auto relative z-10">
+    <!-- Title -->
+    <div class="text-center mb-12">
+      <h1 class="font-['Playfair_Display'] text-4xl md:text-5xl font-bold text-white mb-2">
+        Votre Panier
+      </h1>
+      <p class="text-gray-400 italic">Récapitulatif de votre commande</p>
+    </div>
 
-  <div *ngIf="!loading && !panier.length" class="text-center py-16">
-    <p class="text-gray-500 text-xl">Votre panier est vide.</p>
-    <a routerLink="/carte" class="inline-block mt-6 px-8 py-3 bg-[#c9a8a3] text-white rounded-full hover:bg-[#b8978f] transition-colors">
-      Découvrir nos produits
-    </a>
-  </div>
+    <!-- Loading -->
+    <div *ngIf="loading" class="text-center py-20">
+      <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-[#E8722A] border-t-transparent"></div>
+      <p class="text-gray-400 mt-4">Chargement...</p>
+    </div>
 
-  <div *ngIf="!loading && panier.length" class="max-w-5xl mx-auto">
-    <div class="space-y-8 mb-12">
-      <div *ngFor="let item of panier" class="flex flex-wrap gap-6 items-center bg-transparent">
-        <div class="w-56 h-40 bg-gray-300 rounded-2xl flex-shrink-0 overflow-hidden flex items-center justify-center">
-          <span class="text-gray-500 text-sm">Image</span>
-        </div>
+    <!-- Error -->
+    <p *ngIf="errorMessage" class="text-red-400 text-center text-sm bg-red-500/10 py-3 rounded-lg mb-6">
+      {{ errorMessage }}
+    </p>
 
-        <div class="flex-1 min-w-[200px]">
-          <h3 class="text-xl font-medium text-[#b8a39e] mb-2">{{ item.name }}</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-          </p>
-        </div>
+    <!-- Empty Cart -->
+    <div *ngIf="!loading && !panier.length" class="text-center py-20">
+      <div class="w-24 h-24 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg class="w-12 h-12 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" 
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+        </svg>
+      </div>
+      <p class="text-gray-400 text-xl mb-6">Votre panier est vide</p>
+      <a routerLink="/carte" 
+         class="inline-block px-10 py-4 bg-[#E8722A] text-white font-medium rounded-full 
+                hover:bg-[#D35F1A] transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/30">
+        Découvrir nos produits
+      </a>
+    </div>
 
-        <div class="flex flex-col gap-3">
-          <div class="bg-[#e8d4cc] rounded-full px-6 py-2 flex justify-between items-center min-w-[180px]">
-            <span class="text-[#a89590] font-medium">Prix :</span>
-            <span class="text-[#a89590] font-medium">{{ item.prix_unitaire | number: '1.2-2' }}€</span>
+    <!-- Cart Items -->
+    <div *ngIf="!loading && panier.length">
+      <div class="space-y-6 mb-12">
+        <div *ngFor="let item of panier" 
+             class="bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-wrap gap-6 items-center">
+          <!-- Image -->
+          <div class="w-32 h-24 bg-[#2A2A2A] rounded-xl flex-shrink-0 overflow-hidden">
+            <img src="/medias/sushi-2853382_1920.webp" alt="Produit" class="w-full h-full object-cover">
           </div>
 
-          <div class="bg-[#e8d4cc] rounded-full px-4 py-2 flex items-center justify-between min-w-[180px]">
-            <span class="text-[#a89590] font-medium">Quantité :</span>
-            <div class="flex items-center gap-2">
-              <button 
-                type="button" 
-                (click)="updateQuantity(item, -1)"
-                class="w-8 h-8 bg-[#d4c4bc] rounded-full text-white font-bold hover:bg-[#c9a8a3] transition-colors flex items-center justify-center">
-                -
-              </button>
-              <span class="text-[#a89590] font-medium w-8 text-center">{{ item.quantite }}</span>
-              <button 
-                type="button" 
-                (click)="updateQuantity(item, 1)"
-                class="w-8 h-8 bg-[#d4c4bc] rounded-full text-white font-bold hover:bg-[#c9a8a3] transition-colors flex items-center justify-center">
-                +
-              </button>
+          <!-- Info -->
+          <div class="flex-1 min-w-[200px]">
+            <h3 class="text-xl font-semibold text-white mb-1">{{ item.name }}</h3>
+            <p class="text-gray-400 text-sm">Délicieuse sélection de sushis frais</p>
+          </div>
+
+          <!-- Price & Quantity -->
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center gap-4">
+              <span class="text-gray-400 text-sm">Prix unitaire:</span>
+              <span class="text-[#E8722A] font-bold text-lg">{{ item.prix_unitaire | number: '1.2-2' }}€</span>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <span class="text-gray-400 text-sm">Quantité:</span>
+              <div class="flex items-center bg-white/5 rounded-full overflow-hidden border border-white/10">
+                <button 
+                  type="button" 
+                  (click)="updateQuantity(item, -1)"
+                  class="w-10 h-10 text-white hover:bg-[#E8722A] transition-colors flex items-center justify-center">
+                  -
+                </button>
+                <span class="w-12 text-center text-white font-medium">{{ item.quantite }}</span>
+                <button 
+                  type="button" 
+                  (click)="updateQuantity(item, 1)"
+                  class="w-10 h-10 text-white hover:bg-[#E8722A] transition-colors flex items-center justify-center">
+                  +
+                </button>
+              </div>
             </div>
           </div>
 
+          <!-- Remove -->
           <button 
             type="button" 
             (click)="removeItem(item)"
-            class="text-red-400 text-sm hover:text-red-600 transition-colors text-right">
-            Supprimer
+            class="text-red-400 hover:text-red-300 transition-colors p-2 hover:bg-red-500/10 rounded-full">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+            </svg>
           </button>
         </div>
       </div>
-    </div>
 
-    <div class="flex flex-wrap justify-between items-end gap-8 mt-12 pt-8 border-t border-[#d4c4bc]">
-      <div class="space-y-3">
-        <div class="bg-[#e8d4cc] rounded-2xl px-8 py-4 flex justify-between items-center min-w-[200px]">
-          <span class="text-[#a89590] font-medium">Taxe:</span>
-          <span class="text-[#a89590] font-medium">{{ (total * 0.2) | number: '1.2-2' }}€</span>
-        </div>
-        <div class="bg-[#e8d4cc] rounded-2xl px-8 py-4 flex justify-between items-center min-w-[200px]">
-          <span class="text-[#a89590] font-medium">Total:</span>
-          <span class="text-[#a89590] font-bold text-xl">{{ total | number: '1.2-2' }}€</span>
-        </div>
-      </div>
-
-      <div class="text-center">
-        <a routerLink="/commander" class="block w-80 py-4 bg-[#d4c4bc] text-white text-xl font-medium rounded-full hover:bg-[#c9a8a3] transition-colors tracking-widest">
-          PAYER
-        </a>
-
-        <div class="flex justify-center gap-4 mt-4">
-          <div class="w-12 h-8 bg-[#0070ba] rounded flex items-center justify-center">
-            <span class="text-white text-xs font-bold">PP</span>
+      <!-- Summary -->
+      <div class="bg-white/5 border border-white/10 rounded-3xl p-8">
+        <div class="flex flex-wrap justify-between items-end gap-8">
+          <!-- Totals -->
+          <div class="space-y-4">
+            <div class="flex items-center gap-8">
+              <span class="text-gray-400">Sous-total :</span>
+              <span class="text-white font-medium">{{ (total / 1.2) | number: '1.2-2' }}€</span>
+            </div>
+            <div class="flex items-center gap-8">
+              <span class="text-gray-400">TVA (20%) :</span>
+              <span class="text-white font-medium">{{ (total * 0.2 / 1.2) | number: '1.2-2' }}€</span>
+            </div>
+            <div class="flex items-center gap-8 pt-4 border-t border-white/10">
+              <span class="text-white text-lg font-medium">Total :</span>
+              <span class="text-[#E8722A] text-3xl font-bold">{{ total | number: '1.2-2' }}€</span>
+            </div>
           </div>
-          <div class="w-12 h-8 bg-white border border-gray-300 rounded flex items-center justify-center">
-            <span class="text-gray-600 text-xs">MC</span>
+
+          <!-- Checkout -->
+          <div class="text-center">
+            <a routerLink="/commander" 
+               class="inline-block w-full md:w-auto px-12 py-4 bg-[#E8722A] text-white text-lg font-semibold rounded-full 
+                      hover:bg-[#D35F1A] transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/30">
+              Passer la commande
+            </a>
+
+            <!-- Payment methods -->
+            <div class="flex justify-center gap-4 mt-6">
+              <div class="w-14 h-9 bg-white/10 border border-white/10 rounded-lg flex items-center justify-center">
+                <span class="text-white text-xs font-bold">VISA</span>
+              </div>
+              <div class="w-14 h-9 bg-white/10 border border-white/10 rounded-lg flex items-center justify-center">
+                <span class="text-white text-xs font-bold">MC</span>
+              </div>
+              <div class="w-14 h-9 bg-[#0070ba] rounded-lg flex items-center justify-center">
+                <span class="text-white text-xs font-bold">PP</span>
+              </div>
+            </div>
+
+            <p class="text-gray-500 text-xs mt-4 max-w-xs mx-auto leading-relaxed">
+              En passant commande, vous acceptez nos conditions générales de vente.
+            </p>
           </div>
         </div>
-
-        <p class="text-[#a89590] text-xs mt-4 max-w-xs mx-auto leading-relaxed">
-          En sélectionnant l'une des options de paiement ci-dessus tu confirmes avoir lu, compris et accepté les Conditions d'utilisation, les Conditions de ventes et la Politique de retour de EISHI.
-        </p>
       </div>
     </div>
   </div>

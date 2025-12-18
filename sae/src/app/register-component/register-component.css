@@ -1,49 +1,15 @@
-.register {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem;
-  margin-top: 2rem;
-  max-width: 400px;
+/* Register Component Styles */
+
+/* Spinner animation */
+.animate-spin {
+  animation: spin 1s linear infinite;
 }
 
-.register div {
-  margin-bottom: 1rem;
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
-
-.register label {
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.register input {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.register button {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.register button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.error {
-  color: red;
-  margin: 0.5rem 0;
-}
-
-.success {
-  color: green;
-  margin: 0.5rem 0;
-}
-

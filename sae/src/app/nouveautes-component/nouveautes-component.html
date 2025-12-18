@@ -1,14 +1,120 @@
-<main class="bg-[#f5e6e0] min-h-screen">
-  <section class="relative">
-    <div class="w-full h-40 bg-cover bg-center flex flex-col items-center justify-center" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0)), url('/medias/sushi-2853382_1920.webp');">
-      <h1 class="text-3xl font-bold text-white">Nouveautés</h1>
-      <p class="text-xl italic text-white mt-2">Nos dernières créations</p>
+<main class="bg-[#1A1A1A] min-h-screen seigaiha-pattern">
+  <!-- Hero Section -->
+  <section class="relative bg-[#F5EDE8] py-20 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="font-['Playfair_Display'] text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        Nouveautés
+      </h1>
+      <p class="text-gray-600 text-lg italic">
+        Nos dernières créations culinaires
+      </p>
     </div>
   </section>
-  
-  <section class="py-12 px-6">
-    <div class="text-center">
-      <p class="text-gray-600">Contenu à venir...</p>
+
+  <!-- Products Grid -->
+  <section class="py-16 px-6 relative overflow-hidden">
+    <!-- Japanese decoration -->
+    <div class="japanese-decoration" aria-hidden="true">
+      新商品
+    </div>
+
+    <div class="max-w-6xl mx-auto relative z-10">
+      <!-- Section Title -->
+      <div class="text-center mb-12">
+        <h2 class="font-['Playfair_Display'] text-3xl font-bold text-[#E8722A] italic">
+          Découvrez nos nouveautés
+        </h2>
+        <p class="text-gray-400 mt-2">
+          Fraîchement préparées pour vous
+        </p>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Product Card 1 -->
+        <div class="product-card group cursor-pointer" routerLink="/carte">
+          <div class="overflow-hidden">
+            <img src="/medias/sushi-2853382_1920.webp" 
+                 alt="Nouveau plat" 
+                 class="product-card-image">
+          </div>
+          <div class="p-4">
+            <div class="mb-2">
+              <span class="inline-block px-3 py-1 bg-[#E8722A] text-white text-xs font-medium rounded-full mb-2">
+                Nouveau
+              </span>
+              <h3 class="font-semibold text-white text-lg">Box Sakura</h3>
+              <p class="text-gray-400 text-sm">Assortiment de sashimis et makis printaniers</p>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-1 text-[#E8722A]">
+                <span>★</span>
+                <span class="text-sm">4.8</span>
+              </div>
+              <span class="text-white font-bold">29.99€</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 2 -->
+        <div class="product-card group cursor-pointer" routerLink="/carte">
+          <div class="overflow-hidden">
+            <img src="/medias/sushi-2853382_1920.webp" 
+                 alt="Nouveau plat" 
+                 class="product-card-image">
+          </div>
+          <div class="p-4">
+            <div class="mb-2">
+              <span class="inline-block px-3 py-1 bg-[#E8722A] text-white text-xs font-medium rounded-full mb-2">
+                Nouveau
+              </span>
+              <h3 class="font-semibold text-white text-lg">Dragon Roll</h3>
+              <p class="text-gray-400 text-sm">Maki signature à l'avocat et crevette tempura</p>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-1 text-[#E8722A]">
+                <span>★</span>
+                <span class="text-sm">4.9</span>
+              </div>
+              <span class="text-white font-bold">18.99€</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 3 -->
+        <div class="product-card group cursor-pointer" routerLink="/carte">
+          <div class="overflow-hidden">
+            <img src="/medias/sushi-2853382_1920.webp" 
+                 alt="Nouveau plat" 
+                 class="product-card-image">
+          </div>
+          <div class="p-4">
+            <div class="mb-2">
+              <span class="inline-block px-3 py-1 bg-[#E8722A] text-white text-xs font-medium rounded-full mb-2">
+                Nouveau
+              </span>
+              <h3 class="font-semibold text-white text-lg">Chirashi Deluxe</h3>
+              <p class="text-gray-400 text-sm">Bol de riz vinaigré garni de poissons frais</p>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center gap-1 text-[#E8722A]">
+                <span>★</span>
+                <span class="text-sm">4.7</span>
+              </div>
+              <span class="text-white font-bold">24.99€</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Button -->
+      <div class="text-center mt-12">
+        <a routerLink="/carte" 
+           class="inline-block px-10 py-4 bg-[#E8722A] text-white font-medium rounded-full 
+                  hover:bg-[#D35F1A] transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/30">
+          Voir toute la carte
+        </a>
+      </div>
     </div>
   </section>
 </main>

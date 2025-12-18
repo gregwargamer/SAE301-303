@@ -1,11 +1,54 @@
-<h1>Commande confirmee</h1>
+<main class="bg-[#1A1A1A] min-h-screen seigaiha-pattern flex items-center justify-center py-12 px-6">
+  <!-- Japanese decoration -->
+  <div class="japanese-decoration" aria-hidden="true">
+    完了
+  </div>
 
-<p>Merci pour votre commande !</p>
+  <div class="max-w-lg mx-auto text-center relative z-10">
+    <!-- Success Icon -->
+    <div class="w-24 h-24 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-8 animate-bounce">
+      <svg class="w-12 h-12 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+      </svg>
+    </div>
 
-@if (commandeId) {
-  <p>Numero de commande : {{ commandeId }}</p>
-}
+    <!-- Title -->
+    <h1 class="font-['Playfair_Display'] text-4xl md:text-5xl font-bold text-white mb-4">
+      Commande confirmée !
+    </h1>
 
-<p>Votre commande arrivera sous peu.</p>
+    <p class="text-gray-400 text-lg mb-8">
+      Merci pour votre commande chez Eishi !
+    </p>
 
-<a routerLink="/">Retour a l'accueil</a>
+    <!-- Order number -->
+    @if (commandeId) {
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8">
+        <p class="text-gray-400 text-sm mb-2">Numéro de commande</p>
+        <p class="text-[#E8722A] text-2xl font-bold">{{ commandeId }}</p>
+      </div>
+    }
+
+    <!-- Info -->
+    <div class="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8 text-left">
+      <div class="flex items-start gap-4">
+        <div class="w-10 h-10 bg-[#E8722A]/20 rounded-full flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-[#E8722A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-white font-medium mb-1">Livraison estimée</h3>
+          <p class="text-gray-400 text-sm">Votre commande sera livrée dans 30-45 minutes</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <a routerLink="/" 
+       class="inline-block px-10 py-4 bg-[#E8722A] text-white font-semibold rounded-full 
+              hover:bg-[#D35F1A] transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/30">
+      Retour à l'accueil
+    </a>
+  </div>
+</main>

@@ -1,30 +1,23 @@
-/* Product component styles */
+/* Product Component Styles */
 
-/* Smooth transitions */
-.transition-colors {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+/* Animation */
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease forwards;
 }
 
-.transition-shadow {
-  transition-property: box-shadow;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-/* Custom animations */
-@keyframes pulse {
-  0%, 100% {
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
     opacity: 1;
-  }
-  50% {
-    opacity: .8;
+    transform: translateY(0);
   }
 }
 
-.animate-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+.animate-spin {
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
@@ -34,8 +27,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-.animate-spin {
-  animation: spin 1s linear infinite;
 }
