@@ -9,51 +9,50 @@
 
     <!-- Navigation centrale -->
     <div class="flex-1 flex items-center justify-center gap-12 lg:gap-16">
-      <a routerLink="/" 
-         routerLinkActive="active-link" 
-         [routerLinkActiveOptions]="{exact: true}" 
-         class="nav-link text-gray-800 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
+      <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"
+        class="nav-link text-gray-800 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
         Accueil
       </a>
 
-      <a routerLink="/carte" 
-         routerLinkActive="active-link" 
-         class="nav-link text-gray-600 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
+      <a routerLink="/carte" routerLinkActive="active-link"
+        class="nav-link text-gray-600 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
         Carte
       </a>
-      
-      <a routerLink="/nouveautes" 
-         routerLinkActive="active-link" 
-         class="nav-link text-gray-600 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
+
+      <a routerLink="/nouveautes" routerLinkActive="active-link"
+        class="nav-link text-gray-600 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
         Nouveautés
       </a>
-      
-      <a routerLink="/reservations" 
-         routerLinkActive="active-link" 
-         class="nav-link text-gray-600 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
+
+      <a routerLink="/reservations" routerLinkActive="active-link"
+        class="nav-link text-gray-600 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
         Notre service
+      </a>
+
+      <a routerLink="/dashboard" routerLinkActive="active-link"
+        class="nav-link text-gray-600 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
+        Statistiques
       </a>
     </div>
 
     <!-- Actions droite -->
     <div class="flex items-center gap-4">
       <!-- Panier -->
-      <a routerLink="/panier" 
-         class="relative p-2 text-gray-700 hover:text-gray-900 transition-colors">
+      <a routerLink="/panier" class="relative p-2 text-gray-700 hover:text-gray-900 transition-colors">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" 
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
         </svg>
       </a>
 
       <ng-container *ngIf="!isAuthenticated()">
-        <a routerLink="/login" 
-           class="px-5 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+        <a routerLink="/login"
+          class="px-5 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
           Connexion
         </a>
-        
-        <a routerLink="/register" 
-           class="px-5 py-2 bg-[#E8722A] text-white text-sm font-medium rounded-full hover:bg-[#D35F1A] transition-all hover:shadow-lg hover:shadow-orange-500/20">
+
+        <a routerLink="/register"
+          class="px-5 py-2 bg-[#E8722A] text-white text-sm font-medium rounded-full hover:bg-[#D35F1A] transition-all hover:shadow-lg hover:shadow-orange-500/20">
           S'inscrire
         </a>
       </ng-container>
@@ -61,8 +60,8 @@
       <!-- Utilisateur connecté -->
       <ng-container *ngIf="isAuthenticated()">
         <span class="text-gray-700 font-medium text-sm">{{ getUsername() }}</span>
-        <button (click)="logout()" 
-                class="px-5 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-full hover:bg-gray-100 transition-colors">
+        <button (click)="logout()"
+          class="px-5 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-full hover:bg-gray-100 transition-colors">
           Déconnexion
         </button>
       </ng-container>

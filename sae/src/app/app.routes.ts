@@ -9,6 +9,7 @@ import { RegisterComponent } from './register-component/register-component';
 import { ReservationsComponent } from './reservations-component/reservations-component';
 import { Passercommande } from './passercommande/passercommande';
 import { ConfirmationComponent } from './confirmation/confirmation';
+import { Dashboard } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -50,6 +51,10 @@ export const routes: Routes = [
   {
     path: 'confirmation',
     component: ConfirmationComponent,
+  },
+  {
+    path: 'dashboard',
+    component: Dashboard,
   },
 ];
 
