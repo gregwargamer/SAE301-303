@@ -28,6 +28,8 @@ export class ProductComponent implements OnInit {
   error = '';
   quantity = 1;
   showConfirmation = false;
+  showError = false;
+  errorMessage = '';
   similarProducts: Box[] = [];
 
   constructor(
@@ -110,6 +112,15 @@ export class ProductComponent implements OnInit {
         error: (error) => {
           if (error.status === 401) {
             this.router.navigate(['/login']);
+            return;
+          }
+          // affiche l'erreur si le panier est plein
+          if (error.message && error.message.includes('panier plein')) {
+            this.errorMessage = 'maximum de 10 boxes';
+            this.showError = true;
+            setTimeout(() => {
+              this.showError = false;
+            }, 3000);
           }
         }
       });

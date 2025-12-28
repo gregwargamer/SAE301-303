@@ -25,6 +25,8 @@ interface Box {
 export class MenuComponent implements OnInit {
   boxes: Box[] = [];
   showConfirmation = false;
+  showError = false;
+  errorMessage = '';
 
   constructor(
     private restApiService: RestApiService,
@@ -56,6 +58,14 @@ export class MenuComponent implements OnInit {
           this.router.navigate(['/login']);
           return;
         }
+        // affiche l'erreur si le panier est plein
+        if (error.message && error.message.includes('panier plein')) {
+          this.errorMessage = 'maximum de 10 boxes';
+          this.showError = true;
+          setTimeout(() => {
+            this.showError = false;
+          }, 3000);
+        }
       },
     });
   }
@@ -83,7 +93,11 @@ export class MenuComponent implements OnInit {
           this.router.navigate(['/login']);
           return;
         }
-        console.error('Erreur lors de l\'ajout au panier', error);
+        // affiche l'erreur si le panier est plein
+        if (error.message && error.message.includes('panier plein')) {
+          this.errorMessage = 'maximum de 10 boxes';
+          this.showError = true;
+        }
       },
     });
   }

@@ -106,7 +106,7 @@ export class PanierComponent implements OnInit, OnDestroy {
           this.router.navigate(['/login']);
           return;
         }
-        this.errorMessage = 'erreur mise a jour';
+        this.errorMessage = 'maximum de 10 boxes';
       },
     });
   }

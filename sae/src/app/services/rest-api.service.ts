@@ -32,4 +32,8 @@ export class RestApiService {
   deleteProduct(id: string): Observable<any> {
     return this.http.delete(`${this.config.boxesUrl}/${id}`);
   }
+
+  getBestSellers(): Observable<any> {
+    return this.http.get(`${this.config.apiBase}/boxes/bestsellers.php`);
+  }
 }

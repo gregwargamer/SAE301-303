@@ -26,9 +26,13 @@
 
       <a routerLink="/reservations" routerLinkActive="active-link"
         class="nav-link text-gray-600 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
-        Notre service
+        Reservations
       </a>
 
+      <a routerLink="/dashboard" routerLinkActive="active-link"
+        class="nav-link text-gray-600 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
+        Statistiques
+      </a>
     </div>
 
     <!-- Actions droite -->
@@ -41,7 +45,7 @@
         </svg>
       </a>
 
-      <ng-container *ngIf="!isAuthenticated()">
+      @if (!isAuthenticated()) { <!--comme ca l'autre arrete de me foutre des erreur -->
         <a routerLink="/login"
           class="px-5 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
           Connexion
@@ -51,16 +55,16 @@
           class="px-5 py-2 bg-[#E8722A] text-white text-sm font-medium rounded-full hover:bg-[#D35F1A] transition-all hover:shadow-lg hover:shadow-orange-500/20">
           S'inscrire
         </a>
-      </ng-container>
+      }
 
       <!-- Utilisateur connecté -->
-      <ng-container *ngIf="isAuthenticated()">
+      @if (isAuthenticated()) {
         <span class="text-gray-700 font-medium text-sm">{{ getUsername() }}</span>
         <button (click)="logout()"
           class="px-5 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-full hover:bg-gray-100 transition-colors">
           Déconnexion
         </button>
-      </ng-container>
+      }
     </div>
   </nav>
 </header>
