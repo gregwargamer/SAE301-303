@@ -78,14 +78,10 @@
         <!-- options -->
         <div class="space-y-3 pt-2">
           <!-- consentement rgpd -->
-            <input type="checkbox" class="w-5 h-5 rounded border-white/20 bg-white/5 text-[#E8722A] focus:ring-[#E8722A]">
-            <span class="group-hover:text-gray-300 transition-colors">Je suis étudiant</span>
-          </label>
-          
           <label class="flex items-center gap-3 text-gray-400 text-sm cursor-pointer group">
             <input type="checkbox" required class="w-5 h-5 rounded border-white/20 bg-white/5 text-[#E8722A] focus:ring-[#E8722A]">
             <span class="group-hover:text-gray-300 transition-colors">
-              J'accepte les <a href="#" class="underline">CGU</a> et la <a routerLink="/politique-rgpd" class="underline">politique de protection des données</a>
+              J'accepte que mes données soient traitées <a routerLink="/politique-rgpd" class="hover:text-[#E8722A] underline transition-colors">politique de protection des données</a>.
             </span>
           </label>
           
@@ -95,8 +91,7 @@
           </label>
         </div>
 
-        <!-- Messages -->
-        <p *nmessages -->
+        <!-- messages -->
         <p *ngIf="errorMessage" class="text-red-400 text-center text-sm bg-red-500/10 py-3 rounded-lg">
           {{ errorMessage }}
         </p>
@@ -129,7 +124,8 @@
         <div class="flex-1 h-px bg-white/10"></div>
       </div>
 
-      <!-- lien connexiont-center">
+      <!-- lien connexion -->
+      <div class="text-center">
         <p class="text-gray-400 mb-3">Déjà un compte ?</p>
         <a routerLink="/login" 
            class="inline-block px-8 py-3 border-2 border-[#E8722A] text-[#E8722A] font-medium rounded-full 
