@@ -10,6 +10,7 @@ import { ReservationsComponent } from './reservations-component/reservations-com
 import { Passercommande } from './passercommande/passercommande';
 import { ConfirmationComponent } from './confirmation/confirmation';
 import { Dashboard } from './dashboard/dashboard.component';
+import { PolitiqueRgpdComponent } from './politique-rgpd/politique-rgpd';
 
 export const routes: Routes = [
   {
@@ -55,6 +56,10 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: Dashboard,
+  },
+  {
+    path: 'politique-rgpd',
+    component: PolitiqueRgpdComponent,
   },
 ];
 

@@ -1,0 +1,11 @@
+section {
+  scroll-margin-top: 6rem;
+}
+
+a {
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}

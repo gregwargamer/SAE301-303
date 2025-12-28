@@ -1,5 +1,5 @@
 <main class="bg-[#1A1A1A] min-h-screen seigaiha-pattern">
-  <!-- Hero Section -->
+  <!-- section hero -->
   <section class="relative bg-[#F5EDE8] py-20 px-6">
     <div class="max-w-4xl mx-auto text-center">
       <h1 class="font-['Playfair_Display'] text-4xl md:text-5xl font-bold text-gray-900 mb-4">
@@ -11,17 +11,16 @@
     </div>
   </section>
 
-  <!-- Services Section -->
+  <!-- section services -->
   <section class="py-16 px-6 relative overflow-hidden">
-    <!-- Japanese decoration -->
+    <!-- decoration japonaise -->
     <div class="japanese-decoration" aria-hidden="true">
       サービス
     </div>
 
     <div class="max-w-6xl mx-auto relative z-10">
-      <!-- Service Cards -->
+      <!-- cartes services -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-        <!-- Service 1 -->
         <div class="bg-white/5 border border-white/10 rounded-2xl p-8 text-center hover:border-[#E8722A]/50 transition-all group">
           <div class="w-16 h-16 bg-[#E8722A]/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-[#E8722A]/20 transition-colors">
             <svg class="w-8 h-8 text-[#E8722A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,7 +34,6 @@
           </p>
         </div>
 
-        <!-- Service 2 -->
         <div class="bg-white/5 border border-white/10 rounded-2xl p-8 text-center hover:border-[#E8722A]/50 transition-all group">
           <div class="w-16 h-16 bg-[#E8722A]/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-[#E8722A]/20 transition-colors">
             <svg class="w-8 h-8 text-[#E8722A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -49,7 +47,6 @@
           </p>
         </div>
 
-        <!-- Service 3 -->
         <div class="bg-white/5 border border-white/10 rounded-2xl p-8 text-center hover:border-[#E8722A]/50 transition-all group">
           <div class="w-16 h-16 bg-[#E8722A]/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-[#E8722A]/20 transition-colors">
             <svg class="w-8 h-8 text-[#E8722A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,7 +61,7 @@
         </div>
       </div>
 
-      <!-- Reservation Form -->
+      <!-- formulaire reservation -->
       <div class="max-w-2xl mx-auto">
         <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-lg">
           <h2 class="font-['Playfair_Display'] text-3xl font-bold text-[#E8722A] text-center mb-8">
@@ -128,6 +125,15 @@
               <textarea rows="4" 
                         placeholder="Allergies, demandes spéciales..."
                         class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#E8722A] transition-colors resize-none"></textarea>
+            </div>
+
+            <!-- consentement rgpd -->
+            <div class="flex items-start gap-3">
+              <input type="checkbox" required id="rgpd-reservation" class="mt-1 w-5 h-5 rounded border-white/20 bg-white/5 text-[#E8722A] focus:ring-[#E8722A]">
+              <label for="rgpd-reservation" class="text-gray-400 text-xs leading-relaxed cursor-pointer">
+                J'accepte que mes données soient traitées pour la gestion de ma réservation conformément à la 
+                <a routerLink="/politique-rgpd" class="text-[#E8722A] hover:underline">politique de protection des données</a>.
+              </label>
             </div>
 
             <button type="submit" 
