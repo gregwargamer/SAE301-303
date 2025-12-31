@@ -13,6 +13,9 @@ import { CartItem, PanierService } from '../services/panier.service';
 })
 export class PanierComponent implements OnInit, OnDestroy {
   panier: CartItem[] = [];
+  subtotal = 0;
+  reductionEtudiant = 0;
+  reduction100 = 0;
   total = 0;
   loading = false;
   errorMessage = '';
@@ -49,9 +52,12 @@ export class PanierComponent implements OnInit, OnDestroy {
   loadPanier(): void {
     this.loading = true;
     this.panierService.getPanier().subscribe({
-      next: (response) => {
-        this.panier = response.items;
-        this.total = this.getTotal();
+      next: (response: any) => {//ouais ouais tg stp je veux pas d'erreurs
+        this.panier = response.items; 
+        this.subtotal = response.subtotal || 0;
+        this.reductionEtudiant = response.reductionEtudiant || 0;
+        this.reduction100 = response.reduction100 || 0;
+        this.total = response.total || 0;
         this.loading = false;
         this.errorMessage = '';
       },

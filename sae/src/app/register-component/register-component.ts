@@ -16,9 +16,15 @@ export class RegisterComponent {
   email = '';
   password = '';
   confirmPassword = '';
+  etudiant = false;
   errorMessage = '';
   successMessage = '';
   loading = false;
+  showPassword = false;
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
 
   constructor(
     private http: HttpClient,
@@ -49,12 +55,13 @@ export class RegisterComponent {
           firstname: this.firstname,
           email: this.email,
           password: this.password,
+          etudiant: this.etudiant,
         }
       )
       .subscribe({
         next: (response) => {
           if (response.response === 'user created') {
-            this.successMessage = 'compte cree avec succes';
+            this.successMessage = 'compte crée avec succes';
             this.loading = false;
             setTimeout(() => {
               window.location.href = '/login';

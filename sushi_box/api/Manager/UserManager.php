@@ -1,6 +1,7 @@
 <?php
 
-class UserManager {
+class UserManager
+{
     private $pdo;
 
     public function __construct()
@@ -10,17 +11,19 @@ class UserManager {
     }
 
     //pour creer un utilisateur
-    public function createUser($firstname, $lastname, $email, $password) {
+    public function createUser($firstname, $lastname, $email, $password, $etudiant = false)
+    {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (firstname, lastname, email, password) VALUES (:firstname, :lastname, :email, :password)";
-        
+        $sql = "INSERT INTO users (firstname, lastname, email, password, etudiant) VALUES (:firstname, :lastname, :email, :password, :etudiant)";
+
         $query = $this->pdo->prepare($sql);
-        
+
         return $query->execute([
             'firstname' => $firstname,
             'lastname' => $lastname,
             'email' => $email,
-            'password' => $passwordHash
+            'password' => $passwordHash,
+            'etudiant' => $etudiant ? 1 : 0
         ]);
     }
 

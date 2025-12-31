@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../config/connexion-db.php';
+require_once __DIR__ . '/../Manager/UserManager.php';
 
 function getJsonInput(): array
 {
@@ -31,20 +32,44 @@ function respondError(string $message, int $status = 400): void
     respondJson(['error' => $message], $status);
 }
 
+// recupere l'utilisateur a partir du token pas comme avant ou ca prenaut un truc randim 
+function getCurrentUser(): ?array
+{
+    $headers = getallheaders();
+    if (!isset($headers['Authorization'])) {
+        return null;
+    }
+
+    $authHeader = $headers['Authorization'];
+    $token = str_replace('Bearer ', '', $authHeader);
+
+    $userManager = new UserManager();
+    return $userManager->findUserByToken($token);
+}
+
 function ensurePanier(PDO $pdo): int
 {
-    $stmt = $pdo->prepare('SELECT id FROM panier WHERE status = "OUVERT" LIMIT 1');
-    $stmt->execute();
+    $user = getCurrentUser();
+
+    if (!$user) {
+        respondError('Vous devez être connecté', 401);
+    }
+
+    $userId = $user['id'];
+
+    // Cherche le panier ouvert de l'utilisateur
+    $stmt = $pdo->prepare('SELECT id FROM panier WHERE utilisateur_id = :user_id AND status = "OUVERT" LIMIT 1');
+    $stmt->execute(['user_id' => $userId]);
     $panierId = $stmt->fetchColumn();
 
     if ($panierId) {
-        return (int)$panierId;
+        return (int) $panierId;
     }
 
-    $insert = $pdo->prepare('INSERT INTO panier (utilisateur_id) VALUES (NULL)');
-    $insert->execute();
+    $insert = $pdo->prepare('INSERT INTO panier (utilisateur_id, status) VALUES (:user_id, "OUVERT")');
+    $insert->execute(['user_id' => $userId]);
 
-    return (int)$pdo->lastInsertId();
+    return (int) $pdo->lastInsertId();
 }
 
 function fetchPanierItems(PDO $pdo, int $panierId): array
@@ -65,15 +90,28 @@ function fetchPanierItems(PDO $pdo, int $panierId): array
     $stmt->execute(['panier' => $panierId]);
     $items = $stmt->fetchAll();
 
-    $total = array_reduce(
+    $subtotal = array_reduce(
         $items,
-        static fn (float $carry, array $item) => $carry + ((float)$item['prix_unitaire'] * (int)$item['quantite']),
+        static fn(float $carry, array $item) => $carry + ((float) $item['prix_unitaire'] * (int) $item['quantite']),
         0.0
     );
+
+    // calcul des reductions
+    $user = getCurrentUser();
+    $isEtudiant = $user && !empty($user['etudiant']);
+    $reductionEtudiant = $isEtudiant ? round($subtotal * 0.10, 2) : 0;
+
+    $totalApresEtudiant = $subtotal - $reductionEtudiant;
+    $reduction100 = ($totalApresEtudiant > 100) ? round($totalApresEtudiant * 0.05, 2) : 0;
+
+    $total = $totalApresEtudiant - $reduction100;
 
     return [
         'panierId' => $panierId,
         'items' => $items,
+        'subtotal' => round($subtotal, 2),
+        'reductionEtudiant' => $reductionEtudiant,
+        'reduction100' => $reduction100,
         'total' => round($total, 2),
     ];
 }
