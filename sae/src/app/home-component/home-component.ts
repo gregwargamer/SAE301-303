@@ -27,12 +27,12 @@ export class HomeComponent implements OnInit {
   constructor(private restApiService: RestApiService) { }
 
   ngOnInit(): void {
-    // 3 premieres nouveautes parce que jsp je vais pas daté les ajouts dans la db... 
-    this.restApiService.getProducts().subscribe((data: Box[]) => {
-      this.nouveautes = data.slice(0, 3);
+    // Récupère les 3 derniers produits ajoutés (nouveautés)
+    this.restApiService.getNouveautes(3).subscribe((data: Box[]) => {
+      this.nouveautes = data;
     });
 
-    // best seller qui viennet de commandes details
+    // Récupère les 3 produits les plus ajoutés au panier (best-sellers)
     this.restApiService.getBestSellers().subscribe((data: Box[]) => {
       this.bestSellers = data;
     });

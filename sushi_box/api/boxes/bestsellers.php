@@ -11,15 +11,16 @@ header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json; charset=utf-8');
 
-    // meilleur ventes
-    $stmt = $pdo->query("
-        SELECT b.*, SUM(cd.quantite) as total_sold
-        FROM boxes b
-        INNER JOIN commande_details cd ON b.id = cd.id_box
-        GROUP BY b.id
-        ORDER BY total_sold DESC
-        LIMIT 3
-    ");
+// Best-sellers : produits les plus ajoutés au panier
+// On utilise la table panier_articles pour compter les ajouts
+$stmt = $pdo->query("
+    SELECT b.*, COALESCE(SUM(pa.quantite), 0) as total_cart_adds
+    FROM boxes b
+    LEFT JOIN panier_articles pa ON b.id = pa.box_id
+    GROUP BY b.id
+    ORDER BY total_cart_adds DESC
+    LIMIT 3
+");
 
-    $bestSellers = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($bestSellers);
+$bestSellers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+echo json_encode($bestSellers);

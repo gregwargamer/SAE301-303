@@ -36,4 +36,8 @@ export class RestApiService {
   getBestSellers(): Observable<any> {
     return this.http.get(`${this.config.apiBase}/boxes/bestsellers.php`);
   }
+
+  getNouveautes(limit: number = 6): Observable<any> {
+    return this.http.get(`${this.config.apiBase}/boxes/nouveautes.php?limit=${limit}`);
+  }
 }

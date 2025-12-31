@@ -14,38 +14,18 @@
   <!-- Filter Section -->
   <section class="bg-[#F5EDE8] pb-8 px-6">
     <div class="max-w-6xl mx-auto">
-      <div class="flex flex-wrap items-center gap-4 justify-center">
+      <div class="flex items-center justify-center">
         <!-- Search -->
-        <div class="flex items-center bg-white rounded-full px-4 py-3 shadow-sm border border-gray-200">
+        <div class="flex items-center bg-white rounded-full px-5 py-3 border border-gray-200 w-full max-w-md">
           <input type="text" 
-                 placeholder="Rechercher un plat" 
-                 class="bg-transparent outline-none text-gray-600 w-48 text-sm">
-          <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                 [(ngModel)]="searchTerm"
+                 placeholder="Rechercher un plat..." 
+                 class="bg-transparent outline-none text-gray-600 flex-1 text-sm">
+          <svg class="w-5 h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         </div>
-
-        <!-- Filters -->
-        <select class="bg-white rounded-full px-5 py-3 text-gray-600 shadow-sm outline-none cursor-pointer border border-gray-200 text-sm">
-          <option>Par taille</option>
-          <option>Petit</option>
-          <option>Moyen</option>
-          <option>Grand</option>
-        </select>
-
-        <select class="bg-white rounded-full px-5 py-3 text-gray-600 shadow-sm outline-none cursor-pointer border border-gray-200 text-sm">
-          <option>Par prix</option>
-          <option>Croissant</option>
-          <option>Décroissant</option>
-        </select>
-
-        <select class="bg-white rounded-full px-5 py-3 text-gray-600 shadow-sm outline-none cursor-pointer border border-gray-200 text-sm">
-          <option>Par catégories</option>
-          <option>Sushis</option>
-          <option>Makis</option>
-          <option>Boxes</option>
-        </select>
       </div>
     </div>
   </section>
@@ -60,7 +40,7 @@
     <div class="max-w-6xl mx-auto relative z-10">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Product Cards from API -->
-        <div *ngFor="let box of boxes" 
+        <div *ngFor="let box of filteredBoxes" 
              [routerLink]="['/produit', box.id]"
              class="product-card group cursor-pointer">
           <div class="overflow-hidden">
@@ -88,8 +68,7 @@
             <!-- Add to cart button -->
             <button (click)="addToCartAndReservation(box); $event.stopPropagation()"
                     class="w-full mt-4 py-3 bg-[#E8722A] text-white font-medium rounded-full 
-                           hover:bg-[#D35F1A] transition-all flex items-center justify-center gap-2
-                           hover:shadow-lg hover:shadow-orange-500/20">
+                           hover:bg-[#D35F1A] transition-all flex items-center justify-center gap-2">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
@@ -103,7 +82,7 @@
 
   <!-- Message de confirmation -->
   <div *ngIf="showConfirmation"
-       class="fixed bottom-6 right-6 bg-green-500 text-white px-6 py-4 rounded-2xl shadow-2xl 
+       class="fixed bottom-6 right-6 bg-green-500 text-white px-6 py-4 rounded-2xl 
               flex items-center gap-3 z-50 animate-fade-in-up">
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
@@ -113,7 +92,7 @@
 
   <!-- Erreur -->
   <div *ngIf="showError"
-       class="fixed bottom-6 right-6 bg-red-500 text-white px-6 py-4 rounded-2xl shadow-2xl 
+       class="fixed bottom-6 right-6 bg-red-500 text-white px-6 py-4 rounded-2xl 
               flex items-center gap-3 z-50 animate-fade-in-up">
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>

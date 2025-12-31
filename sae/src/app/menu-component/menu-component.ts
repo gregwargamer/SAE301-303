@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { PanierService } from '../services/panier.service';
@@ -18,12 +19,13 @@ interface Box {
 
 @Component({
   selector: 'app-menu-component',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './menu-component.html',
   styleUrl: './menu-component.css',
 })
 export class MenuComponent implements OnInit {
   boxes: Box[] = [];
+  searchTerm: string = '';
   showConfirmation = false;
   showError = false;
   errorMessage = '';
@@ -39,6 +41,18 @@ export class MenuComponent implements OnInit {
     this.restApiService.getProducts().subscribe((data) => {
       this.boxes = data;
     });
+  }
+
+  // Getter pour filtrer les boxes en temps réel
+  get filteredBoxes(): Box[] {
+    if (!this.searchTerm.trim()) {
+      return this.boxes;
+    }
+    const term = this.searchTerm.toLowerCase().trim();
+    return this.boxes.filter(box => 
+      box.name.toLowerCase().includes(term) ||
+      (box.description && box.description.toLowerCase().includes(term))
+    );
   }
 
   addToCart(box: Box) {

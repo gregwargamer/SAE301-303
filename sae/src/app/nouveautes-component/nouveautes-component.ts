@@ -26,9 +26,9 @@ export class NouveautesComponent implements OnInit {
   constructor(private restApiService: RestApiService) { }
 
   ngOnInit(): void {
-    // 3 premieres nouveautes parce que jsp je vais pas daté les ajouts dans la db... 
-    this.restApiService.getProducts().subscribe((data: Box[]) => {
-      this.nouveautes = data.slice(0, 6);
+    // Récupère les 6 derniers produits ajoutés (nouveautés)
+    this.restApiService.getNouveautes(6).subscribe((data: Box[]) => {
+      this.nouveautes = data;
     });
   }
 }

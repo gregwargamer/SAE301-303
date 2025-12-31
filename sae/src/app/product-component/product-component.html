@@ -109,7 +109,7 @@
 
               <button (click)="addToCart()"
                       class="flex-1 py-4 bg-[#E8722A] text-white font-semibold rounded-full 
-                             hover:bg-[#D35F1A] transition-all duration-300 hover:shadow-xl hover:shadow-orange-500/30
+                             hover:bg-[#D35F1A] transition-all duration-300
                              flex items-center justify-center gap-2">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
@@ -170,7 +170,7 @@
 
   <!-- Confirmation Toast -->
   <div *ngIf="showConfirmation"
-       class="fixed bottom-6 right-6 bg-green-500 text-white px-6 py-4 rounded-2xl shadow-2xl 
+       class="fixed bottom-6 right-6 bg-green-500 text-white px-6 py-4 rounded-2xl 
               flex items-center gap-3 z-50 animate-fade-in-up">
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
@@ -180,7 +180,7 @@
 
   <!-- Erreur -->
   <div *ngIf="showError"
-       class="fixed bottom-6 right-6 bg-red-500 text-white px-6 py-4 rounded-2xl shadow-2xl 
+       class="fixed bottom-6 right-6 bg-red-500 text-white px-6 py-4 rounded-2xl 
               flex items-center gap-3 z-50 animate-fade-in-up">
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
