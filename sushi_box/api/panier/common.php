@@ -102,7 +102,7 @@ function fetchPanierItems(PDO $pdo, int $panierId): array
     $reductionEtudiant = $isEtudiant ? round($subtotal * 0.10, 2) : 0;
 
     $totalApresEtudiant = $subtotal - $reductionEtudiant;
-    $reduction100 = ($totalApresEtudiant > 100) ? round($totalApresEtudiant * 0.05, 2) : 0;
+    $reduction100 = ($totalApresEtudiant > 100) ? round($totalApresEtudiant * 0.015, 2) : 0;
 
     $total = $totalApresEtudiant - $reduction100;
 
