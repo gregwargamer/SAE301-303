@@ -1,6 +1,6 @@
 /* Header Component Styles */
 
-/* Navigation links style */
+/* Navigation links style - Desktop */
 .nav-link {
   position: relative;
   padding-bottom: 4px;
@@ -23,6 +23,13 @@
 }
 
 .active-link {
+  color: #1a1a1a !important;
+  font-weight: 600;
+}
+
+/* Mobile active link */
+.mobile-active {
+  background-color: #f3f4f6;
   color: #1a1a1a !important;
   font-weight: 600;
 }

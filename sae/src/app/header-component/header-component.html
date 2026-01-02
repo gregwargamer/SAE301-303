@@ -1,65 +1,145 @@
 <header class="bg-[#F5EDE8] py-4 px-6 sticky top-0 z-50">
-  <nav class="max-w-7xl mx-auto flex items-center">
-    <!-- Logo -->
-    <div class="flex-shrink-0">
-      <a routerLink="/" class="block">
-        <img class="w-12 h-12 object-contain" src="../../medias/eishi.png" alt="Logo Eishi">
-      </a>
-    </div>
+  <nav class="max-w-7xl mx-auto">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a routerLink="/" (click)="closeMenu()" class="block">
+          <img class="w-12 h-12 object-contain" src="../../medias/eishi.png" alt="Logo Eishi">
+        </a>
+      </div>
 
-    <!-- Navigation centrale -->
-    <div class="flex-1 flex items-center justify-center gap-12 lg:gap-16">
-      <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"
-        class="nav-link text-gray-800 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
-        Accueil
-      </a>
-
-      <a routerLink="/carte" routerLinkActive="active-link"
-        class="nav-link text-gray-600 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
-        Carte
-      </a>
-
-      <a routerLink="/nouveautes" routerLinkActive="active-link"
-        class="nav-link text-gray-600 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
-        Nouveautés
-      </a>
-
-      <a routerLink="/dashboard" routerLinkActive="active-link"
-        class="nav-link text-gray-600 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
-        Statistiques
-      </a>
-    </div>
-
-    <!-- Actions droite -->
-    <div class="flex items-center gap-4">
-      <!-- Panier -->
-      <a routerLink="/panier" class="relative p-2 text-gray-700 hover:text-gray-900 transition-colors">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-        </svg>
-      </a>
-
-      @if (!isAuthenticated()) { <!--comme ca l'autre arrete de me foutre des erreur -->
-        <a routerLink="/login"
-          class="px-5 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
-          Connexion
+      <!-- Navigation centrale - Desktop uniquement -->
+      <div class="hidden md:flex flex-1 items-center justify-center gap-8 lg:gap-12">
+        <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}"
+          class="nav-link text-gray-800 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
+          Accueil
         </a>
 
-        <a routerLink="/register"
-          class="px-5 py-2 bg-[#E8722A] text-white text-sm font-medium rounded-full hover:bg-[#D35F1A] transition-all">
-          S'inscrire
+        <a routerLink="/carte" routerLinkActive="active-link"
+          class="nav-link text-gray-600 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
+          Carte
         </a>
-      }
 
-      <!-- Utilisateur connecté -->
-      @if (isAuthenticated()) {
-        <span class="text-gray-700 font-medium text-sm">{{ getUsername() }}</span>
-        <button (click)="logout()"
-          class="px-5 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-full hover:bg-gray-100 transition-colors">
-          Déconnexion
+        <a routerLink="/nouveautes" routerLinkActive="active-link"
+          class="nav-link text-gray-600 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
+          Nouveautés
+        </a>
+
+        <a routerLink="/dashboard" routerLinkActive="active-link"
+          class="nav-link text-gray-600 font-medium hover:text-gray-900 transition-colors text-sm tracking-wide">
+          Statistiques
+        </a>
+      </div>
+
+      <!-- Actions droite - Desktop -->
+      <div class="hidden md:flex items-center gap-4">
+        <!-- Panier -->
+        <a routerLink="/panier" class="relative p-2 text-gray-700 hover:text-gray-900 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+        </a>
+
+        @if (!isAuthenticated()) {
+          <a routerLink="/login"
+            class="px-5 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+            Connexion
+          </a>
+
+          <a routerLink="/register"
+            class="px-5 py-2 bg-[#E8722A] text-white text-sm font-medium rounded-full hover:bg-[#D35F1A] transition-all">
+            S'inscrire
+          </a>
+        }
+
+        @if (isAuthenticated()) {
+          <span class="text-gray-700 font-medium text-sm">{{ getUsername() }}</span>
+          <button (click)="logout()"
+            class="px-5 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-full hover:bg-gray-100 transition-colors">
+            Déconnexion
+          </button>
+        }
+      </div>
+
+      <!-- Boutons panier et hamburger - Mobile -->
+      <div class="flex md:hidden items-center gap-2">
+        <!-- Panier mobile -->
+        <a routerLink="/panier" class="relative p-2 text-gray-700 hover:text-gray-900 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+        </a>
+
+        <!-- Bouton hamburger -->
+        <button (click)="toggleMenu()" class="p-2 text-gray-700 hover:text-gray-900 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            @if (!isMenuOpen) {
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16" />
+            } @else {
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M6 18L18 6M6 6l12 12" />
+            }
+          </svg>
         </button>
-      }
+      </div>
     </div>
+
+    <!-- Menu mobile -->
+    @if (isMenuOpen) {
+      <div class="md:hidden mt-4 pb-4 space-y-3 border-t border-gray-200 pt-4">
+        <a routerLink="/" routerLinkActive="mobile-active" [routerLinkActiveOptions]="{exact: true}"
+          (click)="closeMenu()"
+          class="block py-2 px-4 text-gray-800 font-medium hover:bg-gray-100 rounded-lg transition-colors">
+          Accueil
+        </a>
+
+        <a routerLink="/carte" routerLinkActive="mobile-active"
+          (click)="closeMenu()"
+          class="block py-2 px-4 text-gray-600 font-medium hover:bg-gray-100 rounded-lg transition-colors">
+          Carte
+        </a>
+
+        <a routerLink="/nouveautes" routerLinkActive="mobile-active"
+          (click)="closeMenu()"
+          class="block py-2 px-4 text-gray-600 font-medium hover:bg-gray-100 rounded-lg transition-colors">
+          Nouveautés
+        </a>
+
+        <a routerLink="/dashboard" routerLinkActive="mobile-active"
+          (click)="closeMenu()"
+          class="block py-2 px-4 text-gray-600 font-medium hover:bg-gray-100 rounded-lg transition-colors">
+          Statistiques
+        </a>
+
+        <div class="border-t border-gray-200 pt-3 mt-3">
+          @if (!isAuthenticated()) {
+            <a routerLink="/login"
+              (click)="closeMenu()"
+              class="block py-2 px-4 text-gray-700 font-medium hover:bg-gray-100 rounded-lg transition-colors">
+              Connexion
+            </a>
+
+            <a routerLink="/register"
+              (click)="closeMenu()"
+              class="block mt-2 py-2 px-4 bg-[#E8722A] text-white font-medium text-center rounded-lg hover:bg-[#D35F1A] transition-all">
+              S'inscrire
+            </a>
+          }
+
+          @if (isAuthenticated()) {
+            <div class="px-4 py-2 text-gray-700 font-medium">
+              {{ getUsername() }}
+            </div>
+            <button (click)="logout()"
+              class="w-full mt-2 py-2 px-4 text-gray-700 font-medium border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors">
+              Déconnexion
+            </button>
+          }
+        </div>
+      </div>
+    }
   </nav>
 </header>
