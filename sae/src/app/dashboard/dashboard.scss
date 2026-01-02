@@ -93,7 +93,7 @@ $font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  background: linear-gradient(135deg, $color-orange 0%, $color-orange-hover 100%);
+  background: $color-orange;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -194,7 +194,7 @@ $font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: linear-gradient(135deg, $color-orange 0%, $color-orange-hover 100%);
+  background: $color-orange;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -332,19 +332,19 @@ $font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
   
   &.student {
-    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    background: #10B981;
   }
   
   &.cart {
-    background: linear-gradient(135deg, #E8722A 0%, #D35F1A 100%);
+    background: $color-orange;
   }
   
   &.users {
-    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    background: #3B82F6;
   }
   
   &.orders {
-    background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+    background: #8B5CF6;
   }
   
   @media (min-width: 640px) {
@@ -435,7 +435,7 @@ $font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .chart-icon.revenue {
-  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  background: #10B981;
 }
 
 // Year Selector
@@ -471,7 +471,7 @@ $font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
   
   &.active {
-    background: linear-gradient(135deg, $color-orange 0%, $color-orange-hover 100%);
+    background: $color-orange;
     border-color: $color-orange;
     color: white;
   }
