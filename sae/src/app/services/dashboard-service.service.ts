@@ -11,6 +11,22 @@ export interface Stats {
   totalOrders: number;
 }
 
+export interface RevenueMonth {
+  mois: string;
+  label: string;
+  chiffre_affaires: number;
+  nombre_commandes: number;
+}
+
+export interface RevenueData {
+  success: boolean;
+  year: number;
+  available_years: number[];
+  data: RevenueMonth[];
+  total_revenue: number;
+  total_orders: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class DashboardService {
   private api: string;
@@ -25,5 +41,12 @@ export class DashboardService {
 
   getStats(): Observable<Stats> {
     return this.http.get<Stats>(`${this.config.apiBase}/stats/index.php`);
+  }
+
+  getRevenue(year?: number): Observable<RevenueData> {
+    const url = year 
+      ? `${this.config.apiBase}/stats/revenue.php?year=${year}`
+      : `${this.config.apiBase}/stats/revenue.php`;
+    return this.http.get<RevenueData>(url);
   }
 }

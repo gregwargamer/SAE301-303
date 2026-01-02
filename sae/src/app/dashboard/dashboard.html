@@ -6,6 +6,19 @@
       <p class="dashboard-subtitle">Visualisation des données produits et utilisateurs</p>
     </div>
     
+    <!-- Date Card -->
+    <div class="date-card">
+      <div class="date-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
+        </svg>
+      </div>
+      <div class="date-content">
+        <span class="date-day">{{ formatDate(currentDate) }}</span>
+        <span class="date-time">{{ formatTime(currentDate) }}</span>
+      </div>
+    </div>
+    
     <!-- Stats Cards -->
     <div class="stats-cards">
       <!-- Pourcentage étudiants -->
@@ -61,6 +74,47 @@
       </div>
     </div>
     
+    <!-- Revenue Chart (Full Width) -->
+    <div class="chart-card revenue-card">
+      <div class="chart-card-header">
+        <div class="chart-icon revenue">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+          </svg>
+        </div>
+        <div class="chart-header-content">
+          <h3 class="chart-title">Chiffre d'affaires mensuel</h3>
+          @if (revenueData) {
+            <span class="revenue-total">Total {{ selectedYear }}: {{ revenueData.total_revenue | number:'1.2-2' }} €</span>
+          }
+        </div>
+        
+        <!-- Sélecteur d'année -->
+        <div class="year-selector">
+          @for (year of availableYears; track year) {
+            <button 
+              class="year-btn" 
+              [class.active]="year === selectedYear"
+              [disabled]="revenueLoading"
+              (click)="changeYear(year)">
+              {{ year }}
+            </button>
+          }
+        </div>
+      </div>
+      
+      <!-- Loading overlay -->
+      @if (revenueLoading) {
+        <div class="chart-loading">
+          <div class="loading-spinner"></div>
+        </div>
+      }
+      
+      <div class="chart-wrapper revenue-wrapper">
+        <canvas #revenueChart></canvas>
+      </div>
+    </div>
+    
     <!-- Charts Grid -->
     <div class="dashboard-grid">
       <!-- Pie Chart Card -->
@@ -96,4 +150,3 @@
     </div>
   </div>
 </section>
-

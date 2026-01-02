@@ -1,43 +1,106 @@
-<h1>Passer commande</h1>
+<section class="order-section">
+  <div class="order-container">
+    <!-- Header -->
+    <div class="order-header">
+      <h1 class="order-title">Passer commande</h1>
+      <p class="order-subtitle">Remplissez vos informations de livraison</p>
+    </div>
+    
+    <!-- Form Card -->
+    <div class="order-card">
+      <form [formGroup]="form" (ngSubmit)="passerCommande()">
+        <!-- Telephone -->
+        <div class="form-group">
+          <label for="telephone" class="form-label">Téléphone</label>
+          <input 
+            type="tel" 
+            id="telephone" 
+            formControlName="telephone" 
+            class="form-input"
+            placeholder="06 12 34 56 78"
+          >
+        </div>
 
-<form [formGroup]="form" (ngSubmit)="passerCommande()">
-  <div>
-    <label for="telephone">Telephone</label>
-    <input type="text" id="telephone" formControlName="telephone">
+        <!-- Adresse -->
+        <div class="form-group">
+          <label for="adresse" class="form-label">Adresse</label>
+          <input 
+            type="text" 
+            id="adresse" 
+            formControlName="adresse" 
+            class="form-input"
+            placeholder="123 Rue du Sushi"
+          >
+        </div>
+
+        <!-- Code postal et Ville -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="code_postal" class="form-label">Code Postal</label>
+            <input 
+              type="text" 
+              id="code_postal" 
+              formControlName="code_postal" 
+              class="form-input"
+              placeholder="75001"
+              maxlength="5"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="ville" class="form-label">Ville</label>
+            <input 
+              type="text" 
+              id="ville" 
+              formControlName="ville" 
+              class="form-input"
+              placeholder="Paris"
+            >
+          </div>
+        </div>
+
+        <!-- Consentement RGPD -->
+        <div class="rgpd-group">
+          <label class="rgpd-label">
+            <input type="checkbox" required class="rgpd-checkbox">
+            <span class="rgpd-text">
+              J'accepte que mes données soient traitées conformément à la 
+              <a routerLink="/politique-rgpd" class="rgpd-link">politique de protection des données</a>.
+            </span>
+          </label>
+        </div>
+
+        <!-- Error Message -->
+        @if (error) {
+          <div class="error-message">
+            <svg class="error-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+            </svg>
+            <span class="error-text">{{ error }}</span>
+          </div>
+        }
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn" [disabled]="loading">
+          @if (loading) {
+            <span class="spinner"></span>
+            <span>Traitement en cours...</span>
+          } @else {
+            <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+            </svg>
+            <span>Confirmer la commande</span>
+          }
+        </button>
+      </form>
+
+      <!-- Back Link -->
+      <a routerLink="/panier" class="back-link">
+        <svg class="back-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+        </svg>
+        <span>Retour au panier</span>
+      </a>
+    </div>
   </div>
-
-  <div>
-    <label for="adresse">Adresse</label>
-    <input type="text" id="adresse" formControlName="adresse">
-  </div>
-
-  <div>
-    <label for="code_postal">Code Postal</label>
-    <input type="text" id="code_postal" formControlName="code_postal" maxlength="5">
-  </div>
-
-  <div>
-    <label for="ville">Ville</label>
-    <input type="text" id="ville" formControlName="ville">
-  </div>
-
-  <!-- consentement rgpd -->
-  <div style="margin-top: 1rem; font-size: 0.8rem;">
-    <label style="display: flex; align-items: center; gap: 0.5rem;">
-      <input type="checkbox" required>
-      <span>J'accepte que mes données soient traitées <a routerLink="/politique-rgpd" style="text-decoration: underline;">politique de protection des données</a>.</span>
-    </label>
-  </div>
-
-  @if (error) {
-    <p>{{ error }}</p>
-  }
-
-  <button type="submit" [disabled]="loading">
-    @if (loading) {
-      Envoi en cours...
-    } @else {
-      Passer Commande
-    }
-  </button>
-</form>
+</section>
