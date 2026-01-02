@@ -116,4 +116,17 @@ export class PanierComponent implements OnInit, OnDestroy {
       },
     });
   }
+
+  // panier en localstorage 
+  validerPanier(): void {
+    if (this.panier.length > 0) {
+      const cartData = {
+        items: this.panier,
+        total: this.total,
+        date: new Date().toISOString()
+      };
+      localStorage.setItem('dernier_panier_valide', JSON.stringify(cartData));
+      this.router.navigate(['/commander']);
+    }
+  }
 }
