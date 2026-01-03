@@ -20,20 +20,7 @@ try {
     $totalStudents = 0;
     $studentPercentage = 0;
     
-    try {
-        // Tester si la colonne existe
-        $stmtCheck = $pdo->query("SELECT etudiant FROM users LIMIT 1");
-        
-        // Si on arrive ici, la colonne existe
-        $stmtStudents = $pdo->query("SELECT COUNT(*) as total FROM users WHERE etudiant = 1");
-        $totalStudents = $stmtStudents->fetch(PDO::FETCH_ASSOC)['total'];
-        $studentPercentage = $totalUsers > 0 ? round(($totalStudents / $totalUsers) * 100, 1) : 0;
-    } catch (PDOException $e) {
-        // La colonne etudiant n'existe pas, on garde les valeurs à 0
-        $totalStudents = 0;
-        $studentPercentage = 0;
-    }
-
+   
     // Panier moyen (moyenne des totaux des commandes)
     $stmtAvgCart = $pdo->query("
         SELECT AVG(total) as avg_cart 
@@ -59,3 +46,4 @@ try {
     http_response_code(500);
     echo json_encode(['error' => $e->getMessage()]);
 }
+?>

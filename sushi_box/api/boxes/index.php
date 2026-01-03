@@ -7,21 +7,14 @@ error_reporting(E_ALL);
 
 require_once '../Manager/Boxmanager.php';
 
-try {
+$boxManager = new BoxManager();
 
-   $boxManager = new BoxManager();
+$boxes = $boxManager->findAll();
 
-   $boxes = $boxManager->findAll();
-
-   // erm jsp il faut ca sinon ca marhce pas 
-   header('Access-Control-Allow-Origin: *');
-   header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-   header('Access-Control-Allow-Headers: Content-Type');
-   header('Content-Type: application/json; charset=utf-8');
-   echo json_encode($boxes);
-
-} catch (\Throwable $th) {
-
-   echo $th->getMessage();
-
-}
+// erm jsp il faut ca sinon ca marhce pas 
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Content-Type: application/json; charset=utf-8');
+echo json_encode($boxes);
+?>

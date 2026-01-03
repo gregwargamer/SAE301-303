@@ -53,4 +53,4 @@ if (empty($orders)) { //hop comme ca ca empeche d'avoir rien en réponse
     http_response_code(200);
     echo json_encode($orders);
 }
-
+?>

@@ -26,3 +26,4 @@ $stmt->execute();
 
 $nouveautes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 echo json_encode($nouveautes);
+?>

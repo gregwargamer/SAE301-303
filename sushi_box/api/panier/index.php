@@ -36,7 +36,7 @@ try {
 
         $panierId = ensurePanier($pdo);
 
-        $pdo->beginTransaction();
+        $pdo->beginTransaction();  
 
         $boxStmt = $pdo->prepare('SELECT price FROM boxes WHERE id = :id');
         $boxStmt->execute(['id' => $boxId]);
@@ -131,4 +131,4 @@ try {
     }
     respondError($th->getMessage(), 500);
 }
-
+?>

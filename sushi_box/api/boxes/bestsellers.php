@@ -24,3 +24,4 @@ $stmt = $pdo->query("
 
 $bestSellers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 echo json_encode($bestSellers);
+?>

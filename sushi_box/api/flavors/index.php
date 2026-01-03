@@ -12,19 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 require_once '../../config/connexion-db.php';
 
-try {
     // recuperation de toutes les saveurs
     $stmt = $pdo->query("SELECT * FROM flavors ORDER BY name");
     $flavors = $stmt->fetchAll();
 
     echo json_encode($flavors);
 
-} catch (Throwable $th) {
-    http_response_code(500);
-    echo json_encode(['error' => $th->getMessage()]);
-}
-
-
-
-
-
+?>

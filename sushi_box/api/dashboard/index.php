@@ -10,20 +10,15 @@ header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json; charset=utf-8');
 
-$action = isset($_GET['action']) ? $_GET['action'] : '';
+// Statistiques par saveurs
+$stmt = $pdo->query("
+    SELECT f.name as categorie, COUNT(bf.box_id) as total
+    FROM flavors f
+    LEFT JOIN box_flavors bf ON f.id = bf.flavor_id
+    GROUP BY f.id, f.name
+    ORDER BY total DESC
+");
+$data = $stmt->fetchAll();
 
-if ($action === 'categories') {
-        // Statistiques par saveurs
-        $stmt = $pdo->query("
-            SELECT f.name as categorie, COUNT(bf.box_id) as total
-            FROM flavors f
-            LEFT JOIN box_flavors bf ON f.id = bf.flavor_id
-            GROUP BY f.id, f.name
-            ORDER BY total DESC
-        ");
-        $data = $stmt->fetchAll();
-        echo json_encode($data);
-    } else {
-        http_response_code(400);
-        echo json_encode(['error' => 'Action non valide ou manquante']);
-    }
+echo json_encode($data);
+?>

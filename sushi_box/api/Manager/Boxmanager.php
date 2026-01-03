@@ -76,3 +76,4 @@ class BoxManager {
         return $box;
     }
 }
+?>

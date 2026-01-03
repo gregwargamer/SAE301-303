@@ -115,4 +115,4 @@ function fetchPanierItems(PDO $pdo, int $panierId): array
         'total' => round($total, 2),
     ];
 }
-
+?>

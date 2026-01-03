@@ -36,7 +36,7 @@ export class DashboardService {
   }
 
   getCategories() {
-    return this.http.get<any[]>(`${this.api}?action=categories`);
+    return this.http.get<any[]>(`${this.api}`);
   }
 
   getStats(): Observable<Stats> {

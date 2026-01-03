@@ -68,7 +68,7 @@ try {
     $panier = $panierStmt->fetch();
 
     if (!$panier) {
-        $pdo->rollBack();
+        $pdo->rollBack(); //je laisse parce que ca a servi plusieurs fois quand la bdd change et que ca fait de la merde avec les users
         http_response_code(400);
         echo json_encode(['error' => 'panier vide ou inexistant']);
         exit;
@@ -150,3 +150,4 @@ try {
     http_response_code(500);
     echo json_encode(['error' => 'erreur serveur: ' . $e->getMessage()]);
 }
+?>

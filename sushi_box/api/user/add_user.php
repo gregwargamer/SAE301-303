@@ -52,3 +52,4 @@ if ($success) {
     header('Content-Type: application/json');
     echo json_encode(['response' => 'error during user creation']);
 }
+?>

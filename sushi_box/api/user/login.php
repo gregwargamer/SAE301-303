@@ -45,3 +45,4 @@ echo json_encode([
     'lastname' => $user['lastname'],
 ]);
 exit;
+?>

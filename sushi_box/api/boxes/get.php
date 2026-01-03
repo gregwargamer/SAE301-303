@@ -17,12 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 require_once '../Manager/Boxmanager.php';
 
-try {
-    if (!isset($_GET['id'])) {
-        http_response_code(400);
-        echo json_encode(['success' => false, 'error' => 'ID manquant']);
-        exit;
-    }
 
     $boxManager = new BoxManager();
     $box = $boxManager->findById($_GET['id']);
@@ -35,7 +29,4 @@ try {
 
     echo json_encode(['success' => true, 'data' => $box]);
 
-} catch (\Throwable $th) {
-    http_response_code(500);
-    echo json_encode(['success' => false, 'error' => $th->getMessage()]);
-}
+?>

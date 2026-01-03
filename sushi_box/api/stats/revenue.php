@@ -11,26 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 require_once __DIR__ . '/../../config/connexion-db.php';
 
-try {
-    // Récupérer l'année demandée (par défaut: année courante)
-    $year = isset($_GET['year']) ? intval($_GET['year']) : date('Y');
-    
-    // Vérifier quelle colonne de date existe dans la table commandes
-    $dateColumn = 'date_commande';
-    
-    // Tester si la colonne date_commande existe
-    try {
-        $testStmt = $pdo->query("SELECT date_commande FROM commandes LIMIT 1");
-    } catch (PDOException $e) {
-        // Essayer avec created_at
-        try {
-            $testStmt = $pdo->query("SELECT created_at FROM commandes LIMIT 1");
-            $dateColumn = 'created_at';
-        } catch (PDOException $e2) {
-            // Aucune colonne de date trouvée
-            $dateColumn = null;
-        }
-    }
 
     // Labels des mois en français
     $moisLabels = [
@@ -119,11 +99,4 @@ try {
         'total_revenue' => $totalRevenue,
         'total_orders' => $totalOrders
     ]);
-
-} catch (Exception $e) {
-    http_response_code(500);
-    echo json_encode([
-        'success' => false,
-        'error' => 'Erreur serveur: ' . $e->getMessage()
-    ]);
-}
+?>
