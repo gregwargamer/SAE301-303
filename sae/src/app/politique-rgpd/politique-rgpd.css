@@ -2,10 +2,23 @@ section {
   scroll-margin-top: 6rem;
 }
 
-a {
-  transition: all 0.3s ease;
+.deco-jap {
+  position: absolute;
+  top: -2rem;
+  right: -2rem;
+  font-size: 12rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.03);
+  writing-mode: vertical-rl;
+  font-family: "Noto Sans JP", sans-serif;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
 }
 
-a:hover {
-  opacity: 0.8;
+@media (max-width: 768px) {
+  .deco-jap {
+    font-size: 8rem;
+    right: -1rem;
+  }
 }
