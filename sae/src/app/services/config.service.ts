@@ -11,6 +11,8 @@ export class ConfigService {
 
   readonly boxesUrl = `${this.apiBase}/boxes/index.php`;
   readonly boxDetailUrl = `${this.apiBase}/boxes/get.php`;
+  readonly bestSellersUrl = `${this.apiBase}/boxes/bestsellers.php`;
+  readonly nouveautesUrl = `${this.apiBase}/boxes/nouveautes.php`;
 
 
   readonly panierUrl = `${this.apiBase}/panier/index.php`;

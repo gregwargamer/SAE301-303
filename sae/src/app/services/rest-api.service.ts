@@ -34,10 +34,10 @@ export class RestApiService {
   }
 
   getBestSellers(): Observable<any> {
-    return this.http.get(`${this.config.apiBase}/boxes/bestsellers.php`);
+    return this.http.get(this.config.bestSellersUrl);
   }
 
   getNouveautes(limit: number = 6): Observable<any> {
-    return this.http.get(`${this.config.apiBase}/boxes/nouveautes.php?limit=${limit}`);
+    return this.http.get(`${this.config.nouveautesUrl}?limit=${limit}`);
   }
 }
