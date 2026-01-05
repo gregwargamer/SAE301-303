@@ -16,8 +16,8 @@ $content = file_get_contents('php://input');
 
 $data = json_decode($content, true);
 
-// verification que tout est présent et non vide (sans lastname)
-if (!isset($data['firstname'], $data['email'], $data['password']) || empty($data['firstname']) || empty($data['email']) || empty($data['password'])) {
+// verification que tout est présent et non vide (nom prenom requis)
+if (!isset($data['firstname'], $data['lastname'], $data['email'], $data['password']) || empty($data['firstname']) || empty($data['lastname']) || empty($data['email']) || empty($data['password'])) {
     // si des champs sont pas remplis ou vides
     http_response_code(400);
     header('Content-Type: application/json');
@@ -38,10 +38,9 @@ if ($userManager->findUserByEmail($data['email'])) {
 }
 //si n'existe pas 
 
-// appel de UserManager puis appel de createUser (lastname et etudiant optionnels)
-$lastname = isset($data['lastname']) ? $data['lastname'] : '';
+// appel de UserManager puis appel de createUser (etudiant optionnel)
 $etudiant = isset($data['etudiant']) ? $data['etudiant'] : false;
-$success = $userManager->createUser($data['firstname'], $lastname, $data['email'], $data['password'], $etudiant);
+$success = $userManager->createUser($data['firstname'], $data['lastname'], $data['email'], $data['password'], $etudiant);
 
 if ($success) {
     http_response_code(201);

@@ -13,6 +13,7 @@ import { ConfigService } from '../services/config.service';
 })
 export class RegisterComponent {
   firstname = '';
+  lastname = '';
   email = '';
   password = '';
   confirmPassword = '';
@@ -33,7 +34,7 @@ export class RegisterComponent {
 
   // inscription
   register(): void {
-    if (!this.firstname || !this.email || !this.password) {
+    if (!this.firstname || !this.lastname || !this.email || !this.password) {
       this.errorMessage = 'rempli tous les champs';
       return;
     }
@@ -53,6 +54,7 @@ export class RegisterComponent {
         this.config.registerUrl,
         {
           firstname: this.firstname,
+          lastname: this.lastname,
           email: this.email,
           password: this.password,
           etudiant: this.etudiant,
