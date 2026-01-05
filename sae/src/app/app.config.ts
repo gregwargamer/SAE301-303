@@ -8,6 +8,11 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(),
-    provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'enabled' }))
+    provideRouter(routes, 
+      withInMemoryScrolling({ 
+        scrollPositionRestoration: 'enabled',
+        anchorScrolling: 'enabled'
+      })
+    )
   ]
 };

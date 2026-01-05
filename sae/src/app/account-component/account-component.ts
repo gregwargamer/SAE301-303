@@ -86,20 +86,16 @@ export class AccountComponent implements OnInit {
 
   loadUserData(): void {
     const token = this.authService.getToken();
-    console.log('🔑 Token:', token);
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     
-    console.log('📡 Appel API profile...');
     this.http.get<UserData>(`${this.configService.apiBase}/user/profile.php`, { headers })
       .subscribe({
         next: (data) => {
-          console.log('✅ Données reçues:', data);
           this.userData = data;
           this.editData = { ...data };
         },
         error: (error) => {
-          console.error('❌ Erreur lors du chargement des données:', error);
-          console.error('Détails:', error.message, error.status);
+          console.error('Erreur lors du chargement des données:', error);
         }
       });
   }
@@ -108,16 +104,13 @@ export class AccountComponent implements OnInit {
     const token = this.authService.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     
-    console.log('📦 Chargement des commandes...');
     this.http.get<Order[]>(`${this.configService.apiBase}/order/list.php`, { headers })
       .subscribe({
         next: (data) => {
-          console.log('✅ Commandes reçues:', data);
-          console.log('Nombre de commandes:', data.length);
           this.orders = data;
         },
         error: (error) => {
-          console.error('❌ Erreur lors du chargement des commandes:', error);
+          console.error('Erreur lors du chargement des commandes:', error);
           this.orders = [];
         }
       });
