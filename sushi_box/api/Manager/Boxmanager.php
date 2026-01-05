@@ -5,7 +5,7 @@ class BoxManager {
 
     public function __construct()
     {
-        $this->pdo = new PDO('mysql:host=localhost;dbname=basesae', 'root', '');
+        $this->pdo = new PDO('mysql:host=localhost;dbname=sushi', 'root', '');
     }
 
     // recuperation de toutes les boites, de leurs aliments et de leurs saveurs

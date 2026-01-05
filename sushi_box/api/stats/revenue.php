@@ -11,11 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 require_once __DIR__ . '/../../config/connexion-db.php';
 
-//faut pas ouvlié ca sinon ca marche pas 
+// Récupérer l'année demandée (par défaut: année courante)
 $year = isset($_GET['year']) ? intval($_GET['year']) : intval(date('Y'));
+
+// Déterminer la colonne de date à utiliser
 $dateColumn = 'date_commande';
 
-    // Labels des mois en français
+// Labels des mois en français
     $moisLabels = [
         '01' => 'Janvier', '02' => 'Février', '03' => 'Mars', '04' => 'Avril',
         '05' => 'Mai', '06' => 'Juin', '07' => 'Juillet', '08' => 'Août',

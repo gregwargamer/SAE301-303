@@ -96,6 +96,20 @@ try {
         $total += $article['prix_unitaire'] * $article['quantite'];
     }
 
+    // mise à jour des informations utilisateur avec les données de livraison
+    $updateUserStmt = $pdo->prepare('
+        UPDATE users 
+        SET telephone = :telephone, adresse = :adresse, code_postal = :code_postal, ville = :ville 
+        WHERE id = :user_id
+    ');
+    $updateUserStmt->execute([
+        'telephone' => $input['telephone'],
+        'adresse' => $input['adresse'],
+        'code_postal' => $input['code_postal'],
+        'ville' => $input['ville'],
+        'user_id' => $user['id']
+    ]);
+
     // creation de la commande
     $commandeStmt = $pdo->prepare('
         INSERT INTO commandes (utilisateur_id, nom, prenom, telephone, adresse, code_postal, ville, total, status_commande)
