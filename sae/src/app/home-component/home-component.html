@@ -168,3 +168,93 @@
     </div>
   </div>
 </section>
+
+<!-- ===== SECTION CONTACT ===== -->
+<section class="relative bg-[#252525] py-16 px-6">
+  <div class="max-w-3xl mx-auto">
+    <!-- Title -->
+    <h2 class="font-['Playfair_Display'] text-3xl md:text-4xl font-bold text-[#E8722A] text-center mb-3">
+      Contactez-nous
+    </h2>
+    <p class="text-gray-400 text-center mb-10">
+      Une question ? Une suggestion ? N'hésitez pas à nous écrire.
+    </p>
+
+    <!-- Formulaire -->
+    <form (ngSubmit)="onSubmitContact()" class="space-y-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- Nom -->
+        <div>
+          <label for="name" class="block text-white font-medium mb-2">Nom complet</label>
+          <input 
+            type="text" 
+            id="name"
+            [(ngModel)]="contactForm.name"
+            name="name"
+            required
+            class="w-full px-4 py-2.5 bg-[#1a1a1a] text-white rounded-lg border border-gray-600 
+                   focus:border-[#E8722A] focus:outline-none transition">
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label for="email" class="block text-white font-medium mb-2">Email</label>
+          <input 
+            type="email" 
+            id="email"
+            [(ngModel)]="contactForm.email"
+            name="email"
+            required
+            class="w-full px-4 py-2.5 bg-[#1a1a1a] text-white rounded-lg border border-gray-600 
+                   focus:border-[#E8722A] focus:outline-none transition">
+        </div>
+      </div>
+
+      <!-- Sujet -->
+      <div>
+        <label for="subject" class="block text-white font-medium mb-2">Sujet</label>
+        <input 
+          type="text" 
+          id="subject"
+          [(ngModel)]="contactForm.subject"
+          name="subject"
+          required
+          class="w-full px-4 py-2.5 bg-[#1a1a1a] text-white rounded-lg border border-gray-600 
+                 focus:border-[#E8722A] focus:outline-none transition">
+      </div>
+
+      <!-- Message -->
+      <div>
+        <label for="message" class="block text-white font-medium mb-2">Message</label>
+        <textarea 
+          id="message"
+          [(ngModel)]="contactForm.message"
+          name="message"
+          rows="5"
+          required
+          class="w-full px-4 py-2.5 bg-[#1a1a1a] text-white rounded-lg border border-gray-600 
+                 focus:border-[#E8722A] focus:outline-none transition resize-none"></textarea>
+      </div>
+
+      <!-- Message de succès/erreur -->
+      @if (contactMessage) {
+        <div class="p-3 rounded-lg" 
+             [ngClass]="contactSuccess ? 'bg-green-900/30 text-green-400 border border-green-600' : 'bg-red-900/30 text-red-400 border border-red-600'">
+          {{ contactMessage }}
+        </div>
+      }
+
+      <!-- Bouton Submit -->
+      <div class="text-center">
+        <button 
+          type="submit"
+          [disabled]="isSubmitting"
+          class="px-10 py-3 bg-[#E8722A] text-white font-medium text-lg rounded-full 
+                 hover:bg-[#D35F1A] transition-all duration-300 
+                 disabled:opacity-50 disabled:cursor-not-allowed">
+          {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
