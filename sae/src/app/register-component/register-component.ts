@@ -18,6 +18,8 @@ export class RegisterComponent {
   password = '';
   confirmPassword = '';
   etudiant = false;
+  rgpdConsent = false;
+  newsletter = false;
   errorMessage = '';
   successMessage = '';
   loading = false;
@@ -44,6 +46,11 @@ export class RegisterComponent {
       return;
     }
 
+    if (!this.rgpdConsent) {
+      this.errorMessage = 'vous devez accepter la politique de protection des données';
+      return;
+    }
+
 
     this.loading = true;
     this.errorMessage = '';
@@ -58,6 +65,7 @@ export class RegisterComponent {
           email: this.email,
           password: this.password,
           etudiant: this.etudiant,
+          newsletter: this.newsletter,
         }
       )
       .subscribe({

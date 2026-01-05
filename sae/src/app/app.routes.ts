@@ -10,6 +10,7 @@ import { Passercommande } from './passercommande/passercommande';
 import { PolitiqueRgpdComponent } from './politique-rgpd/politique-rgpd';
 import { ProductComponent } from './product-component/product-component';
 import { RegisterComponent } from './register-component/register-component';
+import { AccountComponent } from './account-component/account-component';
 
 export const routes: Routes = [
   {
@@ -51,6 +52,10 @@ export const routes: Routes = [
   {
     path: 'politique-rgpd',
     component: PolitiqueRgpdComponent,
+  },
+  {
+    path: 'mon-compte',
+    component: AccountComponent,
   },
   {
     path: 'dashboard',

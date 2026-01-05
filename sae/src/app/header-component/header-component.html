@@ -55,10 +55,10 @@
 
         @if (isAuthenticated()) {
           <span class="text-gray-700 font-medium text-sm">{{ getUsername() }}</span>
-          <button (click)="logout()"
+          <a routerLink="/mon-compte"
             class="px-5 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-full hover:bg-gray-100 transition-colors">
-            Déconnexion
-          </button>
+            Mon compte
+          </a>
         }
       </div>
 
@@ -133,10 +133,11 @@
             <div class="px-4 py-2 text-gray-700 font-medium">
               {{ getUsername() }}
             </div>
-            <button (click)="logout()"
-              class="w-full mt-2 py-2 px-4 text-gray-700 font-medium border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors">
-              Déconnexion
-            </button>
+            <a routerLink="/mon-compte"
+              (click)="closeMenu()"
+              class="block w-full mt-2 py-2 px-4 text-center text-gray-700 font-medium border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors">
+              Mon compte
+            </a>
           }
         </div>
       </div>

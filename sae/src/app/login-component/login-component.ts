@@ -38,7 +38,7 @@ export class LoginComponent {
     this.errorMessage = '';
 
     this.http
-      .post<{ success: boolean; token?: string; firstname?: string; lastname?: string; error?: string }>(
+      .post<{ success: boolean; token?: string; user_id?: number; firstname?: string; lastname?: string; error?: string }>(
         this.config.loginUrl,
         {
           email: this.email,
@@ -49,6 +49,9 @@ export class LoginComponent {
         next: (response) => {
           if (response.success && response.token) {
             localStorage.setItem('auth_token', response.token);
+            if (response.user_id) {
+              localStorage.setItem('user_id', response.user_id.toString());
+            }
             if (response.firstname) {
               localStorage.setItem('user_firstname', response.firstname);
             }

@@ -551,7 +551,7 @@
   -- Constraints for table `commande_details`
   --
   ALTER TABLE `commande_details`
-    ADD CONSTRAINT `fk_details_box` FOREIGN KEY (`id_box`) REFERENCES `boxes` (`id`) ON UPDATE CASCADE,
+    ADD CONSTRAINT `fk_details_box` FOREIGN KE  Y (`id_box`) REFERENCES `boxes` (`id`) ON UPDATE CASCADE,
     ADD CONSTRAINT `fk_details_commande` FOREIGN KEY (`commande_id`) REFERENCES `commandes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
   --

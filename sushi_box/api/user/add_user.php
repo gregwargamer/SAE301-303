@@ -38,9 +38,10 @@ if ($userManager->findUserByEmail($data['email'])) {
 }
 //si n'existe pas 
 
-// appel de UserManager puis appel de createUser (etudiant optionnel)
+// appel de UserManager puis appel de createUser (etudiant et newsletter optionnels)
 $etudiant = isset($data['etudiant']) ? $data['etudiant'] : false;
-$success = $userManager->createUser($data['firstname'], $data['lastname'], $data['email'], $data['password'], $etudiant);
+$newsletter = isset($data['newsletter']) ? $data['newsletter'] : false;
+$success = $userManager->createUser($data['firstname'], $data['lastname'], $data['email'], $data['password'], $etudiant, $newsletter);
 
 if ($success) {
     http_response_code(201);

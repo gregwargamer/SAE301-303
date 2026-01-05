@@ -1,0 +1,14 @@
+@media print {
+  /* Styles pour l'export PDF */
+  body * {
+    visibility: hidden;
+  }
+  
+  .bg-white, .bg-white * {
+    visibility: visible;
+  }
+  
+  button, .no-print {
+    display: none !important;
+  }
+}

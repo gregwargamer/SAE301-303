@@ -41,6 +41,7 @@ header('Content-Type: application/json');
 echo json_encode([
     'success' => true,
     'token' => $token,
+    'user_id' => $user['id'],
     'firstname' => $user['firstname'],
     'lastname' => $user['lastname'],
 ]);

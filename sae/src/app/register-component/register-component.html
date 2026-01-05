@@ -73,7 +73,7 @@
 
           <!-- consentement rgpd -->
           <label class="flex items-center gap-3 text-gray-400 text-sm cursor-pointer group">
-            <input type="checkbox" required
+            <input type="checkbox" [(ngModel)]="rgpdConsent" name="rgpdConsent" required
               class="w-5 h-5 rounded border-white/20 bg-white/5 text-[#E8722A] focus:ring-[#E8722A]">
             <span class="group-hover:text-gray-300 transition-colors">
               J'accepte que mes données soient traitées <a routerLink="/politique-rgpd"
@@ -82,7 +82,7 @@
           </label>
 
           <label class="flex items-center gap-3 text-gray-400 text-sm cursor-pointer group">
-            <input type="checkbox"
+            <input type="checkbox" [(ngModel)]="newsletter" name="newsletter"
               class="w-5 h-5 rounded border-white/20 bg-white/5 text-[#E8722A] focus:ring-[#E8722A]">
             <span class="group-hover:text-gray-300 transition-colors">Recevoir des offres par email (Newsletter)</span>
           </label>

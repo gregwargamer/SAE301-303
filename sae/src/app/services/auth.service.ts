@@ -18,6 +18,7 @@ export class AuthService {
   // deconnexion
   logout(): void {
     localStorage.removeItem('auth_token');
+    localStorage.removeItem('user_id');
     localStorage.removeItem('user_firstname');
     localStorage.removeItem('user_lastname');
   }
@@ -30,6 +31,11 @@ export class AuthService {
   // recupere le nom
   getLastname(): string {
     return localStorage.getItem('user_lastname') || '';
+  }
+
+  // recupere l'id utilisateur
+  getUserId(): string | null {
+    return localStorage.getItem('user_id');
   }
 }
 

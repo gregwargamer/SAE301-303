@@ -34,6 +34,12 @@ export class HeaderComponent {
 
   // deconnexion
   logout(): void {
+    // nettoyer le localStorage du cookie de cet utilisateur
+    const userId = this.authService.getUserId();
+    if (userId) {
+      localStorage.removeItem(`cookieConsent_${userId}`);
+    }
+    
     this.authService.logout();
     this.router.navigate(['/login']);
     this.closeMenu();

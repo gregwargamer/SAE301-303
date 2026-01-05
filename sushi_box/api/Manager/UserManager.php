@@ -11,10 +11,10 @@ class UserManager
     }
 
     //pour creer un utilisateur
-    public function createUser($firstname, $lastname, $email, $password, $etudiant = false)
+    public function createUser($firstname, $lastname, $email, $password, $etudiant = false, $newsletter = false)
     {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (firstname, lastname, email, password, etudiant) VALUES (:firstname, :lastname, :email, :password, :etudiant)";
+        $sql = "INSERT INTO users (firstname, lastname, email, password, etudiant, newsletter) VALUES (:firstname, :lastname, :email, :password, :etudiant, :newsletter)";
 
         $query = $this->pdo->prepare($sql);
 
@@ -23,7 +23,8 @@ class UserManager
             'lastname' => $lastname,
             'email' => $email,
             'password' => $passwordHash,
-            'etudiant' => $etudiant ? 1 : 0
+            'etudiant' => $etudiant ? 1 : 0,
+            'newsletter' => $newsletter ? 1 : 0
         ]);
     }
 
@@ -47,6 +48,16 @@ class UserManager
         $query = $this->pdo->prepare($sql);
         return $query->execute([
             'token' => $token,
+            'user_id' => $userId
+        ]);
+    }
+
+    // met a jour le cookie
+    public function updateCookie($userId, $cookie) {
+        $sql = "UPDATE users SET cookie = :cookie WHERE id = :user_id";
+        $query = $this->pdo->prepare($sql);
+        return $query->execute([
+            'cookie' => $cookie,
             'user_id' => $userId
         ]);
     }

@@ -1,0 +1,234 @@
+﻿<div class="min-h-screen bg-[#252525] py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-5xl font-bold text-white" style="font-family: ''Playfair Display'', serif;">Mon compte</h1>
+      <button 
+        (click)="logout()"
+        class="text-red-500 font-semibold text-lg hover:text-red-400 transition">
+        Se Déconnectez
+      </button>
+    </div>
+
+    <!-- Section Données et Commandes -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Section Données -->
+      <div>
+        <div class="bg-[#2a2a2a] rounded-lg p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-white">Données</h2>
+            
+            @if (!isEditMode) {
+              <button 
+                (click)="toggleEditMode()"
+                class="p-2 bg-white rounded-lg hover:bg-gray-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                </svg>
+              </button>
+            } @else {
+              <div class="flex gap-2">
+                <button 
+                  (click)="cancelEdit()"
+                  class="px-3 py-1 bg-gray-600 text-white text-sm rounded hover:bg-gray-700 transition">
+                  Annuler
+                </button>
+                <button 
+                  (click)="saveChanges()"
+                  class="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition">
+                  Sauvegarder
+                </button>
+              </div>
+            }
+          </div>
+          
+          <div class="space-y-2 text-white">
+            @if (!isEditMode) {
+              <p>Prénom : {{ userData?.firstname || 'Non renseigné' }}</p>
+              <p>Nom : {{ userData?.lastname || 'Non renseigné' }}</p>
+              <p>Email : {{ userData?.email || 'Non renseigné' }}</p>
+              <p>Mot de passe : [Cliquez sur modifier pour changer]</p>
+              <p>Étudiant : {{ userData?.etudiant ? 'Oui' : 'Non' }}</p>
+            } @else {
+              <div class="space-y-3">
+                <div>
+                  <label class="block text-sm text-gray-400 mb-1">Prénom</label>
+                  <input [(ngModel)]="editData.firstname" type="text" class="w-full px-3 py-2 bg-[#1a1a1a] text-white rounded border border-gray-600 focus:border-[#E8722A] focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-sm text-gray-400 mb-1">Nom</label>
+                  <input [(ngModel)]="editData.lastname" type="text" class="w-full px-3 py-2 bg-[#1a1a1a] text-white rounded border border-gray-600 focus:border-[#E8722A] focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-sm text-gray-400 mb-1">Email</label>
+                  <input [(ngModel)]="editData.email" type="email" class="w-full px-3 py-2 bg-[#1a1a1a] text-white rounded border border-gray-600 focus:border-[#E8722A] focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-sm text-gray-400 mb-1">Ancien mot de passe</label>
+                  <input [(ngModel)]="oldPassword" type="password" placeholder="Obligatoire pour changer le mot de passe" class="w-full px-3 py-2 bg-[#1a1a1a] text-white rounded border border-gray-600 focus:border-[#E8722A] focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-sm text-gray-400 mb-1">Nouveau mot de passe</label>
+                  <div class="relative">
+                    <input [(ngModel)]="newPassword" [type]="showPassword ? 'text' : 'password'" placeholder="Laisser vide pour ne pas changer" class="w-full px-3 py-2 bg-[#1a1a1a] text-white rounded border border-gray-600 focus:border-[#E8722A] focus:outline-none pr-10">
+                    <button type="button" (click)="showPassword = !showPassword" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white">
+                      {{ showPassword ? '👁️' : '👁️‍🗨️' }}
+                    </button>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm text-gray-400 mb-1">Confirmer le nouveau mot de passe</label>
+                  <div class="relative">
+                    <input [(ngModel)]="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'" class="w-full px-3 py-2 bg-[#1a1a1a] text-white rounded border border-gray-600 focus:border-[#E8722A] focus:outline-none pr-10">
+                    <button type="button" (click)="showConfirmPassword = !showConfirmPassword" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white">
+                      {{ showConfirmPassword ? '👁️' : '👁️‍🗨️' }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            }
+
+            <div class="pt-4 text-center">
+              <button 
+                (click)="showDeletePopup()"
+                class="text-red-500 text-sm hover:text-red-400 transition">
+                Supprimer toutes mes données
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Boutons Export et Politique -->
+        <div class="mt-6 space-y-3">
+          <button 
+            (click)="exportData()"
+            class="w-full py-3 bg-[#2a2a2a] text-white rounded-lg hover:bg-[#333333] transition font-medium">
+            Exporter vos Données en pdf
+          </button>
+          
+          <button 
+            routerLink="/politique-rgpd"
+            class="w-full py-3 bg-[#2a2a2a] text-white rounded-lg hover:bg-[#333333] transition font-medium">
+            Politique de confidentialité
+          </button>
+        </div>
+      </div>
+
+      <!-- Section Commandes -->
+      <div>
+        <div class="bg-[#2a2a2a] rounded-lg p-6">
+          <h2 class="text-2xl font-bold text-white mb-6">Commande passer</h2>
+          
+          <div class="space-y-4">
+            @if (orders.length > 0) {
+              @for (order of orders; track order.id) {
+                <div class="text-white border-b border-gray-600 pb-3">
+                  <div class="flex justify-between items-start">
+                    <div class="flex-1">
+                      <p class="text-sm text-gray-400">{{ order.date_commande }}</p>
+                      <p class="text-lg">Commande #{{ order.id }}</p>
+                      <p class="text-sm" 
+                         [ngClass]="{
+                           'text-yellow-400': order.status_commande === 'en_attente',
+                           'text-blue-400': order.status_commande === 'en_cours',
+                           'text-green-400': order.status_commande === 'validee' || order.status_commande === 'livree'
+                         }">
+                        Statut: 
+                        @if (order.status_commande === 'en_attente') {
+                          En attente
+                        } @else if (order.status_commande === 'en_cours') {
+                          En cours
+                        } @else if (order.status_commande === 'validee') {
+                          Validée
+                        } @else if (order.status_commande === 'livree') {
+                          Livrée
+                        } @else {
+                          En attente
+                        }
+                      </p>
+                      
+                      <!-- Détails de la commande -->
+                      @if (order.details && order.details.length > 0) {
+                        <div class="mt-2 text-sm text-gray-300">
+                          <p class="font-semibold mb-1">Contenu :</p>
+                          <ul class="list-disc list-inside ml-2 space-y-1">
+                            @for (detail of order.details; track detail.id) {
+                              <li>{{ detail.box_name }} x {{ detail.quantite }}</li>
+                            }
+                          </ul>
+                        </div>
+                      }
+                    </div>
+                    <p class="text-lg font-semibold">{{ order.total }}€</p>
+                  </div>
+                </div>
+              }
+            } @else {
+              <p class="text-gray-400">Aucune commande</p>
+            }
+          </div>
+        </div>
+
+        <!-- Section Cookies et Newsletter -->
+        <div class="bg-[#2a2a2a] rounded-lg p-6 mt-6">
+          <h2 class="text-2xl font-bold text-white mb-6">Cookies et Newletter</h2>
+          
+          <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <input 
+                type="checkbox" 
+                id="cookie"
+                [checked]="userData?.cookie === 1"
+                (change)="toggleCookie()"
+                class="w-5 h-5 bg-gray-700 border-gray-600 rounded cursor-pointer">
+              <label for="cookie" class="text-white cursor-pointer">
+                vous opposer aux cookies commerciaux
+              </label>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <input 
+                type="checkbox" 
+                id="newsletter"
+                [checked]="userData?.newsletter === 1"
+                (change)="toggleNewsletter()"
+                class="w-5 h-5 bg-gray-700 border-gray-600 rounded cursor-pointer">
+              <label for="newsletter" class="text-white cursor-pointer">
+                vous opposer aux Newletter
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Popup de confirmation de suppression -->
+@if (showDeleteConfirm) {
+  <div class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+    <div class="bg-[#2a2a2a] rounded-lg shadow-xl max-w-md w-full p-8 border border-gray-600">
+      <h3 class="text-3xl font-bold text-red-500 mb-6" style="font-family: ''Playfair Display'', serif;">Attention</h3>
+      <p class="text-gray-300 mb-6 leading-relaxed">
+        Cette action supprimera définitivement votre compte et toutes vos données associées. 
+        Cette action est irréversible.
+      </p>
+      <p class="text-white font-semibold mb-8 text-lg">Êtes-vous sûr de vouloir continuer ?</p>
+      
+      <div class="flex gap-4">
+        <button 
+          (click)="cancelDelete()"
+          class="flex-1 px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition font-bold text-lg">
+          NON
+        </button>
+        <button 
+          (click)="confirmDelete()"
+          class="flex-1 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-bold text-lg">
+          OUI
+        </button>
+      </div>
+    </div>
+  </div>
+}

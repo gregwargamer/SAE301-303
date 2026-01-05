@@ -1,0 +1,38 @@
+@if (showBanner) {
+  <div class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
+    <div class="bg-[#F5EDE8] rounded-2xl shadow-2xl max-w-sm w-full p-6 relative animate-scale-in">
+      <!-- Icône Sushi/Cookie -->
+      <div class="flex justify-center mb-4">
+        <div class="text-5xl">
+          🍣🍪
+        </div>
+      </div>
+
+      <!-- Titre -->
+      <h2 class="font-['Playfair_Display'] text-2xl font-bold text-gray-800 text-center mb-3 leading-tight">
+        Veuillez accepter nos Cookies Commerciaux !
+      </h2>
+
+      <!-- Bouton refuser (petit) -->
+      <button (click)="refuseCookies()" 
+        class="w-full text-gray-500 text-sm hover:text-gray-700 transition-colors mb-4 py-1">
+        refuser
+      </button>
+
+      <!-- Boutons principaux -->
+      <div class="grid grid-cols-2 gap-3">
+        <!-- Politique de confidentialité -->
+        <a routerLink="/politique-rgpd" target="_blank" rel="noopener noreferrer"
+          class="flex items-center justify-center px-4 py-3 bg-[#D4C5BC] text-gray-700 text-sm font-medium rounded-lg hover:bg-[#C4B5AC] transition-all text-center">
+          Politique de confidentialité
+        </a>
+
+        <!-- Accepter -->
+        <button (click)="acceptCookies()"
+          class="px-4 py-3 bg-[#E8722A] text-white text-sm font-semibold rounded-lg hover:bg-[#D35F1A] transition-all">
+          ACCEPTER
+        </button>
+      </div>
+    </div>
+  </div>
+}

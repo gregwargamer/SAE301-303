@@ -35,15 +35,16 @@ require_once __DIR__ . '/../../config/connexion-db.php';
     }
 
     if ($dateColumn) {
-        // Récupérer le chiffre d'affaires pour l'année demandée
+        // Récupérer le chiffre d'affaires pour l'année demandée - excluant les utilisateurs qui refusent les cookies commerciaux
         $stmt = $pdo->prepare("
             SELECT 
-                DATE_FORMAT($dateColumn, '%Y-%m') as mois,
-                SUM(total) as chiffre_affaires,
+                DATE_FORMAT(c.$dateColumn, '%Y-%m') as mois,
+                SUM(c.total) as chiffre_affaires,
                 COUNT(*) as nombre_commandes
-            FROM commandes
-            WHERE YEAR($dateColumn) = :year
-            GROUP BY DATE_FORMAT($dateColumn, '%Y-%m')
+            FROM commandes c
+            INNER JOIN users u ON c.utilisateur_id = u.id
+            WHERE YEAR(c.$dateColumn) = :year AND (u.cookie = 0 OR u.cookie IS NULL)
+            GROUP BY DATE_FORMAT(c.$dateColumn, '%Y-%m')
             ORDER BY mois ASC
         ");
         $stmt->execute(['year' => $year]);
@@ -62,9 +63,10 @@ require_once __DIR__ . '/../../config/connexion-db.php';
     $availableYears = [];
     if ($dateColumn) {
         $yearsStmt = $pdo->query("
-            SELECT DISTINCT YEAR($dateColumn) as year 
-            FROM commandes 
-            WHERE $dateColumn IS NOT NULL
+            SELECT DISTINCT YEAR(c.$dateColumn) as year 
+            FROM commandes c
+            INNER JOIN users u ON c.utilisateur_id = u.id
+            WHERE c.$dateColumn IS NOT NULL AND (u.cookie = 0 OR u.cookie IS NULL)
             ORDER BY year DESC
         ");
         $yearsResult = $yearsStmt->fetchAll();
