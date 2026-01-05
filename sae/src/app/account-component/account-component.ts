@@ -289,6 +289,17 @@ export class AccountComponent implements OnInit {
             display: inline-block;
             width: 150px;
           }
+          .section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #E8722A;
+          }
+          .section-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #E8722A;
+          }
           @media print {
             body { padding: 20px; }
           }
@@ -301,6 +312,14 @@ export class AccountComponent implements OnInit {
         <div class="data-line"><strong>Email :</strong> ${this.userData.email || 'Non renseigné'}</div>
         <div class="data-line"><strong>Mot de passe :</strong> ••••••••</div>
         <div class="data-line"><strong>Étudiant :</strong> ${this.userData.etudiant ? 'Oui' : 'Non'}</div>
+        
+        <div class="section">
+          <div class="section-title">Informations de livraison</div>
+          <div class="data-line"><strong>Téléphone :</strong> ${this.userData.telephone || 'Non renseigné'}</div>
+          <div class="data-line"><strong>Adresse :</strong> ${this.userData.adresse || 'Non renseigné'}</div>
+          <div class="data-line"><strong>Code postal :</strong> ${this.userData.code_postal || 'Non renseigné'}</div>
+          <div class="data-line"><strong>Ville :</strong> ${this.userData.ville || 'Non renseigné'}</div>
+        </div>
       </body>
       </html>
     `;

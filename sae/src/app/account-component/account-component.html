@@ -50,6 +50,14 @@
               <p>Email : {{ userData?.email || 'Non renseigné' }}</p>
               <p>Mot de passe : [Cliquez sur modifier pour changer]</p>
               <p>Étudiant : {{ userData?.etudiant ? 'Oui' : 'Non' }}</p>
+              
+              <div class="pt-4 border-t border-gray-600 mt-4">
+                <p class="text-gray-400 text-sm mb-2">Informations de livraison :</p>
+                <p>Téléphone : {{ userData?.telephone || 'Non renseigné' }}</p>
+                <p>Adresse : {{ userData?.adresse || 'Non renseigné' }}</p>
+                <p>Code postal : {{ userData?.code_postal || 'Non renseigné' }}</p>
+                <p>Ville : {{ userData?.ville || 'Non renseigné' }}</p>
+              </div>
             } @else {
               <div class="space-y-3">
                 <div>
@@ -85,8 +93,28 @@
                       {{ showConfirmPassword ? '' : '' }}
                     </button>
                   </div>
-                </div>
-              </div>
+                </div>                
+                <div class="pt-4 border-t border-gray-600 mt-4">
+                  <p class="text-gray-400 text-sm mb-3">Informations de livraison :</p>
+                  <div class="space-y-3">
+                    <div>
+                      <label class="block text-sm text-gray-400 mb-1">Téléphone</label>
+                      <input [(ngModel)]="editData.telephone" type="tel" placeholder="Ex: 01 23 45 67 89" class="w-full px-3 py-2 bg-[#1a1a1a] text-white rounded border border-gray-600 focus:border-[#E8722A] focus:outline-none">
+                    </div>
+                    <div>
+                      <label class="block text-sm text-gray-400 mb-1">Adresse</label>
+                      <input [(ngModel)]="editData.adresse" type="text" placeholder="Ex: 123 rue Example" class="w-full px-3 py-2 bg-[#1a1a1a] text-white rounded border border-gray-600 focus:border-[#E8722A] focus:outline-none">
+                    </div>
+                    <div>
+                      <label class="block text-sm text-gray-400 mb-1">Code postal</label>
+                      <input [(ngModel)]="editData.code_postal" type="text" placeholder="Ex: 75001" maxlength="5" class="w-full px-3 py-2 bg-[#1a1a1a] text-white rounded border border-gray-600 focus:border-[#E8722A] focus:outline-none">
+                    </div>
+                    <div>
+                      <label class="block text-sm text-gray-400 mb-1">Ville</label>
+                      <input [(ngModel)]="editData.ville" type="text" placeholder="Ex: Paris" class="w-full px-3 py-2 bg-[#1a1a1a] text-white rounded border border-gray-600 focus:border-[#E8722A] focus:outline-none">
+                    </div>
+                  </div>
+                </div>              </div>
             }
 
             <div class="pt-4 text-center">
