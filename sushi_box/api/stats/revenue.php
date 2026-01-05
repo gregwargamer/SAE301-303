@@ -11,6 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 require_once __DIR__ . '/../../config/connexion-db.php';
 
+//faut pas ouvlié ca sinon ca marche pas 
+$year = isset($_GET['year']) ? intval($_GET['year']) : intval(date('Y'));
+$dateColumn = 'date_commande';
 
     // Labels des mois en français
     $moisLabels = [
