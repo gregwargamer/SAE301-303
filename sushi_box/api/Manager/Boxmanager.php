@@ -5,7 +5,8 @@ class BoxManager {
 
     public function __construct()
     {
-        $this->pdo = new PDO('mysql:host=localhost;dbname=sushi', 'root', '');
+        require __DIR__ . '/../../config/connexion-db.php';
+        $this->pdo = $pdo;
     }
 
     // recuperation de toutes les boites, de leurs aliments et de leurs saveurs
@@ -41,7 +42,8 @@ class BoxManager {
     }
 
     // Récupérer une box par son ID
-    public function findById($id) {
+    public function findById($id)
+    {
         $stmt = $this->pdo->prepare("SELECT * FROM boxes WHERE id = :id");
         $stmt->execute(['id' => $id]);
         $box = $stmt->fetch(PDO::FETCH_ASSOC);

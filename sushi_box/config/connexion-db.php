@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$db   = 'sushi';
+$db   = 'sushifinal';
 $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';
