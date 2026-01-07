@@ -70,7 +70,7 @@ export class CookieBannerComponent implements OnInit {
       // sinon vérifier la BDD
       const token = this.authService.getToken();
       this.http.get<{ cookie: number | null }>(`${this.config.apiBase}/user/cookie-status.php`, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { 'X-Auth-Token': token || '', Authorization: `Bearer ${token}` }
       }).subscribe({
         next: (response) => {
           // NULL = pas encore répondu, afficher le popup (sauf sur RGPD)
@@ -118,7 +118,7 @@ export class CookieBannerComponent implements OnInit {
       const token = this.authService.getToken();
       this.http.post(`${this.config.apiBase}/user/update-cookie.php`, 
         { cookie: 1 },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { 'X-Auth-Token': token || '', Authorization: `Bearer ${token}` } }
       ).subscribe();
     } else {
       localStorage.setItem('cookieConsent_guest', 'accepted');
@@ -136,7 +136,7 @@ export class CookieBannerComponent implements OnInit {
       const token = this.authService.getToken();
       this.http.post(`${this.config.apiBase}/user/update-cookie.php`, 
         { cookie: 0 },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { 'X-Auth-Token': token || '', Authorization: `Bearer ${token}` } }
       ).subscribe();
     } else {
       localStorage.setItem('cookieConsent_guest', 'refused');

@@ -1,5 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: http://localhost:4200");
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Content-Type: application/json; charset=UTF-8");
@@ -12,15 +12,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 require_once __DIR__ . '/../../config/connexion-db.php';
 require_once __DIR__ . '/../Manager/UserManager.php';
 
-// verification du token
-$headers = getallheaders();
-if (!isset($headers['Authorization'])) {
+// Fonction pour récupérer les headers
+function getRequestHeaders() {
+    $headers = array();
+    if (function_exists('getallheaders')) {
+        $headers = getallheaders();
+    } else {
+        foreach ($_SERVER as $name => $value) {
+            if (substr($name, 0, 5) == 'HTTP_') {
+                $header = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))));
+                $headers[$header] = $value;
+            }
+        }
+    }
+    return $headers;
+}
+
+$headers = getRequestHeaders();
+
+// Chercher X-Auth-Token OU Authorization
+$authHeader = null;
+foreach ($headers as $key => $value) {
+    if (strtolower($key) === 'x-auth-token' || strtolower($key) === 'authorization') {
+        $authHeader = $value;
+        break;
+    }
+}
+
+if (!$authHeader) {
     http_response_code(401);
     echo json_encode(['error' => 'token manquant']);
     exit;
 }
 
-$authHeader = $headers['Authorization'];
 $token = str_replace('Bearer ', '', $authHeader);
 
 $userManager = new UserManager();

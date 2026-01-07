@@ -47,7 +47,7 @@ export class PanierService {
     const token = this.authService.getToken();
     let headers = new HttpHeaders();
     if (token) {
-      headers = headers.set('Authorization', `Bearer ${token}`);
+      headers = headers.set('X-Auth-Token', token).set('Authorization', `Bearer ${token}`);
     }
     return headers;
   }

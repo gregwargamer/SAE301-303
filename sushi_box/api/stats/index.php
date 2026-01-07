@@ -13,18 +13,18 @@ header('Content-Type: application/json; charset=utf-8');
 
 try {
     // Total des utilisateurs (table users) - excluant ceux qui refusent les cookies commerciaux
-    $stmtTotal = $pdo->query("SELECT COUNT(*) as total FROM users WHERE cookie = 0 OR cookie IS NULL");
+    $stmtTotal = $connexion->query("SELECT COUNT(*) as total FROM users WHERE cookie = 0 OR cookie IS NULL");
     $totalUsers = $stmtTotal->fetch(PDO::FETCH_ASSOC)['total'];
 
     // Nombre d'étudiants inscrits - excluant ceux qui refusent les cookies commerciaux
-    $stmtStudents = $pdo->query("SELECT COUNT(*) as total FROM users WHERE etudiant = 1 AND (cookie = 0 OR cookie IS NULL)");
+    $stmtStudents = $connexion->query("SELECT COUNT(*) as total FROM users WHERE etudiant = 1 AND (cookie = 0 OR cookie IS NULL)");
     $totalStudents = $stmtStudents->fetch(PDO::FETCH_ASSOC)['total'];
     
     // Calculer le pourcentage d'étudiants
     $studentPercentage = $totalUsers > 0 ? round(($totalStudents / $totalUsers) * 100, 2) : 0;
     
     // Panier moyen (moyenne des totaux des commandes) - excluant les utilisateurs qui refusent les cookies commerciaux
-    $stmtAvgCart = $pdo->query("
+    $stmtAvgCart = $connexion->query("
         SELECT AVG(c.total) as avg_cart 
         FROM commandes c
         INNER JOIN users u ON c.utilisateur_id = u.id
@@ -34,7 +34,7 @@ try {
     $avgCart = $avgCart ? round($avgCart, 2) : 0;
 
     // Nombre total de commandes - excluant les utilisateurs qui refusent les cookies commerciaux
-    $stmtOrders = $pdo->query("
+    $stmtOrders = $connexion->query("
         SELECT COUNT(*) as total 
         FROM commandes c
         INNER JOIN users u ON c.utilisateur_id = u.id

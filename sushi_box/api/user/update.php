@@ -11,15 +11,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 require_once __DIR__ . '/../../config/connexion-db.php';
 
-// Vérifier l'authentification
-$headers = apache_request_headers();
-if (!isset($headers['Authorization'])) {
+// Fonction pour récupérer les headers de manière compatible
+function getRequestHeaders() {
+    $headers = array();
+    if (function_exists('getallheaders')) {
+        $headers = getallheaders();
+    } else {
+        foreach ($_SERVER as $name => $value) {
+            if (substr($name, 0, 5) == 'HTTP_') {
+                $header = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))));
+                $headers[$header] = $value;
+            }
+        }
+    }
+    return $headers;
+}
+
+$headers = getRequestHeaders();
+
+// Chercher X-Auth-Token OU Authorization (insensible à la casse)
+$authHeader = null;
+foreach ($headers as $key => $value) {
+    if (strtolower($key) === 'x-auth-token' || strtolower($key) === 'authorization') {
+        $authHeader = $value;
+        break;
+    }
+}
+
+if (!$authHeader) {
     http_response_code(401);
     echo json_encode(['error' => 'Token manquant']);
     exit();
 }
 
-$token = str_replace('Bearer ', '', $headers['Authorization']);
+$token = str_replace('Bearer ', '', $authHeader);
 
 // Récupérer les données JSON
 $data = json_decode(file_get_contents('php://input'), true);

@@ -1,7 +1,4 @@
 <?php
-//ini_set('display_errors', 1); //debug shark tududu 
-//error_reporting(E_ALL);
-
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
@@ -15,14 +12,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 require_once __DIR__ . '/../Manager/UserManager.php';
 require_once __DIR__ . '/../../config/connexion-db.php';
 
-$headers = getallheaders();
-if (!isset($headers['Authorization'])) {
+// Fonction pour récupérer les headers de manière compatible
+function getRequestHeaders() {
+    $headers = array();
+    if (function_exists('getallheaders')) {
+        $headers = getallheaders();
+    } else {
+        foreach ($_SERVER as $name => $value) {
+            if (substr($name, 0, 5) == 'HTTP_') {
+                $header = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))));
+                $headers[$header] = $value;
+            }
+        }
+    }
+    return $headers;
+}
+
+$headers = getRequestHeaders();
+
+// Chercher X-Auth-Token OU Authorization (insensible à la casse)
+$authHeader = null;
+foreach ($headers as $key => $value) {
+    if (strtolower($key) === 'x-auth-token' || strtolower($key) === 'authorization') {
+        $authHeader = $value;
+        break;
+    }
+}
+
+if (!$authHeader) {
     http_response_code(401);
     echo json_encode(['error' => 'token manquant']);
     exit;
 }
 
-$authHeader = $headers['Authorization'];
 $token = str_replace('Bearer ', '', $authHeader);
 
 $userManager = new UserManager();

@@ -52,6 +52,7 @@ export class Passercommande implements OnInit {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
+      'X-Auth-Token': this.auth.getToken() || '',
       'Authorization': `Bearer ${this.auth.getToken()}`
     });
 

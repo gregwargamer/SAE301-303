@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: DELETE');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -14,9 +14,12 @@ require_once __DIR__ . '/../../config/connexion-db.php';
 // Fonction pour récupérer les headers de manière compatible
 function getRequestHeaders() {
     $headers = array();
+    
+    // Essayer getallheaders() d'abord
     if (function_exists('getallheaders')) {
         $headers = getallheaders();
     } else {
+        // Fallback pour les serveurs qui ne supportent pas getallheaders()
         foreach ($_SERVER as $name => $value) {
             if (substr($name, 0, 5) == 'HTTP_') {
                 $header = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))));
@@ -24,6 +27,7 @@ function getRequestHeaders() {
             }
         }
     }
+    
     return $headers;
 }
 
@@ -47,8 +51,7 @@ if (!$authHeader) {
 $token = str_replace('Bearer ', '', $authHeader);
 
 try {
-    // Récupérer l'utilisateur à partir du token
-    $stmt = $connexion->prepare('SELECT id FROM users WHERE api_token = :token');
+    $stmt = $connexion->prepare('SELECT * FROM users WHERE api_token = :token');
     $stmt->bindParam(':token', $token);
     $stmt->execute();
     
@@ -60,35 +63,11 @@ try {
         exit();
     }
     
-    $userId = $user['id'];
-    
-    // Supprimer les détails de commandes
-    $connexion->exec("DELETE cd FROM commande_details cd 
-                      INNER JOIN commandes c ON cd.commande_id = c.id 
-                      WHERE c.utilisateur_id = $userId");
-    
-    // Supprimer les articles du panier
-    $connexion->exec("DELETE pa FROM panier_articles pa 
-                      INNER JOIN panier p ON pa.panier_id = p.id 
-                      WHERE p.utilisateur_id = $userId");
-    
-    // Supprimer le panier
-    $stmt = $connexion->prepare('DELETE FROM panier WHERE utilisateur_id = :user_id');
-    $stmt->bindParam(':user_id', $userId);
-    $stmt->execute();
-    
-    // Supprimer les commandes
-    $stmt = $connexion->prepare('DELETE FROM commandes WHERE utilisateur_id = :user_id');
-    $stmt->bindParam(':user_id', $userId);
-    $stmt->execute();
-    
-    // Supprimer l'utilisateur
-    $stmt = $connexion->prepare('DELETE FROM users WHERE id = :id');
-    $stmt->bindParam(':id', $userId);
-    $stmt->execute();
+    // Ne pas renvoyer le mot de passe
+    unset($user['password']);
     
     http_response_code(200);
-    echo json_encode(['success' => true, 'message' => 'Compte supprimé']);
+    echo json_encode($user);
     
 } catch (Exception $e) {
     http_response_code(500);

@@ -3,6 +3,22 @@
 require_once __DIR__ . '/../../config/connexion-db.php';
 require_once __DIR__ . '/../Manager/UserManager.php';
 
+// Fonction pour récupérer les headers de manière compatible
+function getRequestHeaders() {
+    $headers = array();
+    if (function_exists('getallheaders')) {
+        $headers = getallheaders();
+    } else {
+        foreach ($_SERVER as $name => $value) {
+            if (substr($name, 0, 5) == 'HTTP_') {
+                $header = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))));
+                $headers[$header] = $value;
+            }
+        }
+    }
+    return $headers;
+}
+
 function getJsonInput(): array
 {
     $raw = file_get_contents('php://input');
@@ -35,12 +51,21 @@ function respondError(string $message, int $status = 400): void
 // recupere l'utilisateur a partir du token pas comme avant ou ca prenaut un truc randim 
 function getCurrentUser(): ?array
 {
-    $headers = getallheaders();
-    if (!isset($headers['Authorization'])) {
+    $headers = getRequestHeaders();
+    
+    // Chercher X-Auth-Token OU Authorization (insensible à la casse)
+    $authHeader = null;
+    foreach ($headers as $key => $value) {
+        if (strtolower($key) === 'x-auth-token' || strtolower($key) === 'authorization') {
+            $authHeader = $value;
+            break;
+        }
+    }
+    
+    if (!$authHeader) {
         return null;
     }
 
-    $authHeader = $headers['Authorization'];
     $token = str_replace('Bearer ', '', $authHeader);
 
     $userManager = new UserManager();

@@ -86,23 +86,30 @@ export class AccountComponent implements OnInit {
 
   loadUserData(): void {
     const token = this.authService.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    console.log('🔑 Token récupéré:', token);
+    console.log('🌐 URL appelée:', `${this.configService.apiBase}/user/profile.php`);
+    const headers = new HttpHeaders()
+      .set('X-Auth-Token', token || '')
+      .set('Authorization', `Bearer ${token}`);
     
     this.http.get<UserData>(`${this.configService.apiBase}/user/profile.php`, { headers })
       .subscribe({
         next: (data) => {
+          console.log('✅ Données reçues:', data);
           this.userData = data;
           this.editData = { ...data };
         },
         error: (error) => {
-          console.error('Erreur lors du chargement des données:', error);
+          console.error('❌ Erreur lors du chargement des données:', error);
+          console.error('Status:', error.status);
+          console.error('Message:', error.error);
         }
       });
   }
 
   loadOrders(): void {
     const token = this.authService.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().set('X-Auth-Token', token || '').set('Authorization', `Bearer ${token}`);
     
     this.http.get<Order[]>(`${this.configService.apiBase}/order/list.php`, { headers })
       .subscribe({
@@ -152,10 +159,17 @@ export class AccountComponent implements OnInit {
 
     const token = this.authService.getToken();
     const headers = new HttpHeaders()
+      .set('X-Auth-Token', token || '')
       .set('Authorization', `Bearer ${token}`)
       .set('Content-Type', 'application/json');
     
     const dataToUpdate: any = { ...this.editData };
+    // Supprimer les champs password vides
+    delete dataToUpdate.password;
+    delete dataToUpdate.old_password;
+    delete dataToUpdate.new_password;
+    
+    // Ajouter les passwords seulement si renseignés
     if (this.newPassword && this.oldPassword) {
       dataToUpdate.old_password = this.oldPassword;
       dataToUpdate.new_password = this.newPassword;
@@ -197,6 +211,7 @@ export class AccountComponent implements OnInit {
   updateCookiePreference(value: number): void {
     const token = this.authService.getToken();
     const headers = new HttpHeaders()
+      .set('X-Auth-Token', token || '')
       .set('Authorization', `Bearer ${token}`)
       .set('Content-Type', 'application/json');
     
@@ -216,6 +231,7 @@ export class AccountComponent implements OnInit {
   updateNewsletterPreference(value: number): void {
     const token = this.authService.getToken();
     const headers = new HttpHeaders()
+      .set('X-Auth-Token', token || '')
       .set('Authorization', `Bearer ${token}`)
       .set('Content-Type', 'application/json');
     
@@ -242,7 +258,7 @@ export class AccountComponent implements OnInit {
 
   confirmDelete(): void {
     const token = this.authService.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().set('X-Auth-Token', token || '').set('Authorization', `Bearer ${token}`);
     
     this.http.delete(`${this.configService.apiBase}/user/delete.php`, { headers })
       .subscribe({

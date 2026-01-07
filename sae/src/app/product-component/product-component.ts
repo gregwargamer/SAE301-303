@@ -41,20 +41,14 @@ export class ProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Écouter les changements de paramètres dans l'URL
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      if (id) {
-        this.loading = true;
-        this.error = '';
-        this.quantity = 1;
-        this.loadProduct(id);
-        this.loadSimilarProducts();
-      } else {
-        this.error = 'ID produit non trouvé';
-        this.loading = false;
-      }
-    });
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.loadProduct(id);
+      this.loadSimilarProducts();
+    } else {
+      this.error = 'ID produit non trouvé';
+      this.loading = false;
+    }
   }
 
   loadProduct(id: string): void {
