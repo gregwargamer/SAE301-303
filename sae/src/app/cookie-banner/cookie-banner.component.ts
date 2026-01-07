@@ -56,13 +56,14 @@ export class CookieBannerComponent implements OnInit {
       return;
     }
     
-    // si connecté, vérifier la BDD
+    // UNIQUEMENT si connecté
     if (this.authService.isAuthenticated()) {
       const userId = this.authService.getUserId();
       const localConsent = localStorage.getItem(`cookieConsent_${userId}`);
       
       // vérifier d'abord le localStorage de CET utilisateur
       if (localConsent === 'accepted' || localConsent === 'refused') {
+        this.shouldShowBanner = false;
         this.showBanner = false;
         return;
       }
@@ -85,27 +86,15 @@ export class CookieBannerComponent implements OnInit {
           }
         },
         error: () => {
-          // en cas d'erreur, afficher quand même (sauf sur RGPD)
-          if (this.router.url !== '/politique-rgpd') {
-            this.shouldShowBanner = true;
-            this.showBanner = true;
-          }
+          // en cas d'erreur, NE PAS afficher
+          this.shouldShowBanner = false;
+          this.showBanner = false;
         }
       });
     } else {
-      // non connecté : vérifier localStorage général
-      const localConsent = localStorage.getItem('cookieConsent_guest');
-      
-      if (localConsent === 'accepted' || localConsent === 'refused') {
-        this.shouldShowBanner = false;
-        this.showBanner = false;
-      } else {
-        // afficher le popup (sauf sur RGPD)
-        if (this.router.url !== '/politique-rgpd') {
-          this.shouldShowBanner = true;
-          this.showBanner = true;
-        }
-      }
+      // NON connecté : NE JAMAIS afficher le popup
+      this.shouldShowBanner = false;
+      this.showBanner = false;
     }
   }
 
@@ -120,10 +109,9 @@ export class CookieBannerComponent implements OnInit {
         { cookie: 1 },
         { headers: { 'X-Auth-Token': token || '', Authorization: `Bearer ${token}` } }
       ).subscribe();
-    } else {
-      localStorage.setItem('cookieConsent_guest', 'accepted');
     }
     
+    this.shouldShowBanner = false;
     this.showBanner = false;
   }
 
@@ -138,10 +126,9 @@ export class CookieBannerComponent implements OnInit {
         { cookie: 0 },
         { headers: { 'X-Auth-Token': token || '', Authorization: `Bearer ${token}` } }
       ).subscribe();
-    } else {
-      localStorage.setItem('cookieConsent_guest', 'refused');
     }
     
+    this.shouldShowBanner = false;
     this.showBanner = false;
   }
 }
