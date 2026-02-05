@@ -1,0 +1,57 @@
+Protection des données personnelles
+
+Eishi protège les données personnelles des visiteurs de son site web, conformément à la loi française et européenne.
+Informations collectées et leur utilisation
+Eishi collecte uniquement les données personnelles fournies volontairement par les utilisateurs, comme les noms, prénoms, adresses postales et électroniques, numéros de téléphone et adresses postales.  Ces données servent à créer des statistiques et recueillir des avis sur nos sites et produits.
+Les finalités de la collecte et les modalités de traitement sont explicitement mentionnées à chaque collecte de données personnelles sur notre site web.
+Formulaire d’inscription
+Le formulaire d’inscription comporte des mentions sur les finalités de la collecte et un lien vers cette politique de protection des données.
+Abonnement aux notifications :
+Les préférences de communication (newsletter, partenaire, e-mail, SMS) ne sont pas sélectionnées par défaut.  Elles précisent leur finalité et sont faciles à modifier.
+
+Formulaire de contact
+Le formulaire de contact inclut des mentions sur la finalité et un lien vers la politique de protection des données.  Il n’entraîne pas d’abonnement aux notifications commerciales.
+Inscription à la newsletter
+Le formulaire d’inscription à la newsletter contient des mentions sur la finalité et un lien vers la politique de protection des données.
+Statistiques et journaux d’activité
+Votre activité sur le site est enregistrée dans un outil de statistiques non nominatif, sans stockage complet de l’adresse IP.  Ce traitement respecte la vie privée.
+Nous utilisons Google Analytics, qui enregistre votre adresse IP et vous identifie via un cookie. Vous pouvez refuser ce cookie à tout moment via le lien "Gestion des cookies" sur notre site.
+Notre serveur web consigne votre activité dans un journal (log) avec votre adresse IP. Ce journal est supprimé après 30 jours et n’est jamais associé à votre identité, mais uniquement utilisé à des fins techniques.
+Vos données personnelles sont stockées sur cette plateforme. Des sauvegardes sont également stockées sur cette plateforme.  Aucun stockage ni transfert de données n’est effectué hors de l’Espace Économique Européen.
+Vos données sont conservées pendant la durée d’utilisation de votre compte et jusqu’à votre demande de suppression. Elles ne sont pas conservées au-delà de deux ans après la dernière interaction, sauf si la loi impose une durée plus longue.
+Données de commande, de livraison et de facturation : 10 ans (Article L123-22 alinéa 2 du Code de commerce)
+Durées de Conservation des Données : 2 ans
+Fichiers Prospect : Conservés 2 ans maximum après la collecte ou le dernier contact, selon la Norme simplifiée CNIL n°48.
+Cookies Identifiant le Visiteur : Conservés 6 mois maximum, selon la Norme simplifiée CNIL n°48.
+Lettre d’Information : Conservés jusqu’au désabonnement, selon l’Article 6-5° de la loi n°78-17 modifiée.
+Les données dépassant ces durées sont supprimées ou anonymisées.
+Non-Communication des Données Personnelles
+Eishi ne vend, cède ni communique aucune donnée personnelle à des tiers.
+Eishi peut faire appel à des entreprises prestataires pour des tâches comme l’exécution de commandes, les campagnes promotionnelles et le support technique. Ces entreprises peuvent accéder à vos données personnelles si nécessaire, mais elles doivent respecter la législation sur la protection des données et cette politique. Elles ne peuvent utiliser vos données que pour leurs tâches et les conserver uniquement le temps nécessaire.
+Vous avez le droit d’accéder, de rectifier et de vous opposer au traitement de vos données personnelles, conformément à la législation en vigueur.  Vous bénéficiez notamment des droits d’accès et de rectification (articles 15 et 16 RGPD), ainsi que de mise à jour et de complétude de vos données.
+Droits des utilisateurs :
+Verrouiller ou effacer vos données personnelles si elles sont incorrectes, incomplètes, ambiguës, obsolètes ou si leur traitement est interdit (article 17 RGPD).
+Retirer votre consentement à tout moment (article 13-2c RGPD).
+Limiter le traitement de vos données (article 18 RGPD).
+Vous opposer au traitement de vos données (article 21 RGPD).
+Obtenir vos données fournies à Maison Sushi, si elles sont traitées automatiquement avec votre consentement ou dans le cadre d’un contrat (article 20 RGPD).
+Définir le sort de vos données après votre décès.
+
+Exercice de vos droits :
+- En ligne : via la rubrique ‘Contact’
+- Par courrier : Contact@Eishi.fr
+
+Modification de vos données :
+- Modifiez vos données dans la rubrique « Mon compte » ou via le formulaire ‘Contact’
+Désinscription aux communications commerciales :
+- Désinscrivez-vous via la rubrique ‘Contact’ ou l’espace ‘Mon Compte’
+Vous pouvez vous abonner à nos communications commerciales lors de votre inscription, ou plus tard, via « Mon Compte » ou un lien d’abonnement dans un e-mail.  Désabonnez-vous à tout moment via « Mon Compte » ou le lien « Désabonnement » dans chaque e-mail commercial.
+Les cookies sont de petits fichiers que notre site web stocke sur votre appareil pour enregistrer des informations essentielles et faciliter votre navigation.  En vous connectant à Eishi.fr, nous pouvons installer divers cookies dans votre navigateur selon vos préférences de navigation :
+Cookies de session : Temporaires, ils assurent la continuité de votre navigation et sont effacés à la fin de votre session. Ils respectent votre vie privée et sont exemptés de consentement par la CNIL.
+Cookies statistiques : Ils nous permettent d’établir des statistiques de fréquentation (visites, pages vues, abandons de commande, etc.) pour améliorer nos services.
+Authentification externe : Google pour vous identifier.
+
+Notre plateforme affiche un bandeau informatif relatif à l’utilisation de cookies, vous permettant de les accepter ou de les refuser.  Vous avez la possibilité de modifier vos préférences à tout moment via le lien « Gestion des cookies ».  Il est à noter que le refus de certains cookies peut impacter votre expérience de navigation et l’accès à certains services.
+Lors de la visite d’une page de notre plateforme comportant un bouton de partage social, votre navigateur établit une connexion directe avec le réseau social concerné.  Si vous êtes connecté à ce réseau social, le bouton de partage social associe la page visitée à votre compte utilisateur.  L’action de cliquer sur le bouton de partage social ou de commenter une publication entraîne l’envoi des informations correspondantes au réseau social, qui les publiera ensuite sur votre compte utilisateur.
+Afin d’éviter que le réseau social associe les informations de navigation issues de notre plateforme à votre compte utilisateur, nous vous recommandons de vous déconnecter de ce réseau social avant de visiter notre plateforme.
+Les boutons de partage social sont soumis aux politiques de confidentialité des réseaux sociaux auxquels ils sont associés.  Nous vous invitons à consulter ces politiques afin de connaître les modalités d’utilisation des informations de navigation, notamment à des fins publicitaires.
